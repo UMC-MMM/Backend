@@ -3,6 +3,8 @@ package com.example.demo.src.user;
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 
+import com.example.demo.src.user.model.PostLoginReq;
+import com.example.demo.src.user.model.PostLoginRes;
 import com.example.demo.src.user.model.PostUserReq;
 import com.example.demo.src.user.model.PostUserRes;
 import com.example.demo.utils.JwtService;
@@ -62,6 +64,23 @@ public class UserController {
             return new BaseResponse<>((exception.getStatus()));
         }
 
+    }
+
+    @ResponseBody
+    @PostMapping("/login")
+    public BaseResponse<PostLoginRes> login(@RequestBody PostLoginReq postLoginReq) {
+        try {
+            if (postLoginReq.getId() == null || postLoginReq.getId().equals("")) {
+                return new BaseResponse<>(USERS_EMPTY_USER_ID);
+            }
+            if (postLoginReq.getPassword() == null || postLoginReq.getPassword().equals("")) {
+                return new BaseResponse<>(POST_USERS_EMPTY_PASSWORD);
+            }
+            PostLoginRes postLoginRes = userService.login(postLoginReq);
+            return new BaseResponse<>(postLoginRes);
+        } catch (BaseException exception) {
+            return new BaseResponse<>(exception.getStatus());
+        }
     }
 }
 
