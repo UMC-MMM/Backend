@@ -1,6 +1,8 @@
 package com.example.demo.src.user;
 
+import com.example.demo.src.user.model.PostLoginReq;
 import com.example.demo.src.user.model.PostUserReq;
+import com.example.demo.src.user.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -54,5 +56,20 @@ public class UserDao {
                 int.class,
                 checkUserExistParams);
 
+    }
+
+    public UserInfo login(PostLoginReq postLoginReq){
+        String getPwdQuery = "select userIdx, userId, userName, userEmail, userPassword from User where userId = ?";
+        String getPwdParams = postLoginReq.getId();
+
+        return this.jdbcTemplate.queryForObject(getPwdQuery,
+                (rs, rowNum)-> new UserInfo(
+                        rs.getInt("userIdx"),
+                        rs.getString("userId"),
+                        rs.getString("userPassword"),
+                        rs.getString("userName"),
+                        rs.getString("userEmail")
+                ),
+                getPwdParams);
     }
 }
