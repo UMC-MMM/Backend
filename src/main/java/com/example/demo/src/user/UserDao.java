@@ -75,9 +75,9 @@ public class UserDao {
                 getPwdParams);
     }
     public List<GetPointRes> selectUserPointPlus(int userIdx){
-        String selectUserPointPlusQuery = "\n" +
-                "select pointIdx,pointValue,createdAt,pointContent from PointPlus where userIdx=?\n" +
-                "order by PointPlus.createdAt desc;";
+        String selectUserPointPlusQuery =
+                "select pointIdx,pointValue,createdAt,pointContent from PointPlus where userIdx=? \n" +
+                "order by PointPlus.createdAt desc";
         int selectUserPointPlusParam = userIdx;
         return this.jdbcTemplate.query(selectUserPointPlusQuery,
                 (rs,rowNum) -> new GetPointRes(
@@ -89,14 +89,14 @@ public class UserDao {
     }
     public List<GetPointRes> selectUserPointMinus(int userIdx){
         String selectUserPointMinusQuery = "\n" +
-                "select pointIdx,pointValue,createdAt,pointContent from PointMinus where userIdx=?\n" +
-                "order by PointMinus.createdAt desc;";
+                "select pointIdx,pointValue,usedAt,pointContent from PointMinus where userIdx=?\n" +
+                "order by PointMinus.createdAt desc";
         int selectUserPointMinusParam = userIdx;
         return this.jdbcTemplate.query(selectUserPointMinusQuery,
                 (rs,rowNum) -> new GetPointRes(
                         rs.getInt("pointIdx"),
                         rs.getInt("pointValue"),
-                        rs.getString("createdAt"),
+                        rs.getString("usedAt"),
                         rs.getString("pointContent")
                 ),selectUserPointMinusParam);
     }
