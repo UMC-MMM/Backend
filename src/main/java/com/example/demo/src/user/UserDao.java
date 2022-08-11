@@ -88,9 +88,9 @@ public class UserDao {
                 ),selectUserPointPlusParam);
     }
     public List<GetPointRes> selectUserPointMinus(int userIdx){
-        String selectUserPointMinusQuery = "\n" +
-                "select pointIdx,pointValue,usedAt,pointContent from PointMinus where userIdx=?\n" +
-                "order by PointMinus.createdAt desc";
+        String selectUserPointMinusQuery =
+                "select pointIdx,pointValue,usedAt,pointContent from PointMinus where userIdx=? \n" +
+                "order by PointMinus.usedAt desc";
         int selectUserPointMinusParam = userIdx;
         return this.jdbcTemplate.query(selectUserPointMinusQuery,
                 (rs,rowNum) -> new GetPointRes(
