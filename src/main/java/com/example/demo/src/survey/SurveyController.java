@@ -34,6 +34,18 @@ public class SurveyController {
 
 
 
+    @ResponseBody
+    @GetMapping("")
+    public BaseResponse<List<GetSurveyRes>> getSurvey() { //여러 설문조사 볼 수 있으므로 list
+        try {
+            List<GetSurveyRes> getSurveyRes = surveyProvider.retrieveSurvey();
+            return new BaseResponse<>(getSurveyRes);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+
 
     @ResponseBody
     @PatchMapping("/{surveyIdx}/status") // (GET) 127.0.0.1:9000/users

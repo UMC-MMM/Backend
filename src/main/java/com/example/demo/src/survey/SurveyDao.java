@@ -1,7 +1,6 @@
 package com.example.demo.src.survey;
 
 import com.example.demo.src.survey.model.GetSurveyRes;
-import com.example.demo.src.user.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,6 +20,31 @@ public class SurveyDao {
     }
 
 
+
+
+
+    public List<GetSurveyRes> selectSurvey(){
+        String selectSurveyQuery =
+                "SELECT surveyIdx, surveyTitle, createdAt, deadlineAt, writerId, preferGender, preferAge,\n" +
+                        "       surveyTime, hashtag, surveyCategoryIdx, surveyPointValue, totalParticipant\n" +
+                        "FROM Survey WHERE surveyStatus ='A';";
+        return this.jdbcTemplate.query(selectSurveyQuery,
+                (rs,rowNum) -> new GetSurveyRes(
+                        rs.getInt("surveyIdx"),
+                        rs.getString("surveyTitle"),
+                        rs.getString("createdAt"),
+                        rs.getString("deadlineAt"),
+                        rs.getInt("writerId"),
+                        rs.getString("preferGender"),
+                        rs.getInt("preferAge"),
+                        rs.getInt("surveyTime"),
+                        rs.getString("hashtag"),
+                        rs.getInt("surveyCategoryIdx"),
+                        rs.getInt("surveyPointValue"),
+                        rs.getInt("totalParticipant"),
+                        rs.getInt("userIdx")
+                ),null);
+    }
 
     public int deleteSurvey(int surveyIdx){
         String deleteSurveyQuery = "UPDATE Survey SET surveyStatus='N' WHERE surveyIdx=?";

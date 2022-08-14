@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PostSurveyReq {
     private int userIdx;
-    //private List<PostSurveyQuestionReq> surveyQuestionReqs;
+    private List<PostSurveyQuestionReq> surveyQuestionReqs;
 
 
 }

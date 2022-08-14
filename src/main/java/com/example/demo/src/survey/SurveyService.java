@@ -32,7 +32,7 @@ public class SurveyService {
         try{
             int result = surveyDao.deleteSurvey(surveyIdx);
             if(result == 0){
-                throw new BaseException(MODIFY_FAIL_POST);
+                throw new BaseException(DELETE_FAIL_POST);
             }
         }
         catch (Exception exception) {

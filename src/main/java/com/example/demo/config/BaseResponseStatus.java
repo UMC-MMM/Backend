@@ -36,6 +36,14 @@ public enum BaseResponseStatus {
 
     POST_USERS_EMPTY_PASSWORD(false, 2030, "비밀번호를 입력해주세요."),
     POST_USERS_INVALID_PASSWORD(false, 2031, "비밀번호 형식을 확인해주세요."),
+
+    POST_SURVEY_EMPTY_TITLE(false, 2032, "제목을 입력하세요."),
+    POST_SURVEY_INVALID_TITLE(false, 2033, "입력하신 제목의 글자 수가 허용된 범위를 초과하였습니다."),
+    POST_SURVEY_EMPTY_DEADLINE(false, 2034,"마감일을 입력하세요."),
+    POST_SURVEY_EMPTY_SURVEYTIME(false, 2035, "설문 소요 시간을 입력하세요."),
+    POST_SURVEY_EMPTY_CATEGORY(false, 2036, "카테고리를 선택하세요."),
+
+
     /**
      * 3000 : Response 오류
      */

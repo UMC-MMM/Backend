@@ -25,13 +25,17 @@ public class SurveyProvider {
         this.surveyDao = surveyDao;
         this.jwtService = jwtService;
     }
-    public List<GetSurveyRes> retrieveSurvey(int userIdx) throws BaseException{
+
+
+    public List<GetSurveyRes> retrieveSurvey() throws BaseException{
 
         try{
-            List<GetSurveyRes> getSurvey = surveyDao.selectSurvey(userIdx);
+            List<GetSurveyRes> getSurvey = surveyDao.selectSurvey();
+
             return getSurvey;
         }
         catch (Exception exception) {
+            System.out.println(exception);
             throw new BaseException(DATABASE_ERROR);
         }
 
