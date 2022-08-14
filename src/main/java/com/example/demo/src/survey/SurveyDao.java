@@ -26,8 +26,8 @@ public class SurveyDao {
     public List<GetSurveyRes> selectSurvey(){
         String selectSurveyQuery =
                 "SELECT surveyIdx, surveyTitle, createdAt, deadlineAt, writerId, preferGender, preferAge,\n" +
-                        "       surveyTime, hashtag, surveyCategoryIdx, surveyPointValue, totalParticipant\n" +
-                        "FROM Survey WHERE surveyStatus ='A';";
+                        "       surveyTime, hashtag, surveyCategoryIdx, surveyPointValue, totalParticipant, userIdx\n" +
+                        "FROM Survey WHERE surveyStatus ='ACTIVE';";
 
         return this.jdbcTemplate.query(selectSurveyQuery,
                 (rs,rowNum) -> new GetSurveyRes(
@@ -35,7 +35,7 @@ public class SurveyDao {
                         rs.getString("surveyTitle"),
                         rs.getString("createdAt"),
                         rs.getString("deadlineAt"),
-                        rs.getInt("writerId"),
+                        rs.getString("writerId"),
                         rs.getString("preferGender"),
                         rs.getInt("preferAge"),
                         rs.getInt("surveyTime"),
@@ -44,11 +44,12 @@ public class SurveyDao {
                         rs.getInt("surveyPointValue"),
                         rs.getInt("totalParticipant"),
                         rs.getInt("userIdx")
+
                 ));
     }
 
     public int deleteSurvey(int surveyIdx){
-        String deleteSurveyQuery = "UPDATE Survey SET surveyStatus='N' WHERE surveyIdx=?";
+        String deleteSurveyQuery = "UPDATE Survey SET surveyStatus='INACTIVE' WHERE surveyIdx=?";
         Object [] deleteSurveyParams = new Object[] {surveyIdx};
 
         return this.jdbcTemplate.update(deleteSurveyQuery, deleteSurveyParams);

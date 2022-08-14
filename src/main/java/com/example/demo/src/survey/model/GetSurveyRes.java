@@ -14,7 +14,7 @@ public class GetSurveyRes {
     private String surveyTitle;
     private String createdAt;
     private String deadlineAt;
-    private int writerId;
+    private String writerId;
     private String preferGender;
     private int preferAge;
     private int surveyTime;

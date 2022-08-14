@@ -16,8 +16,8 @@ com/example/demo/src/user/model/PostLoginRes.java
  com.example.demo.src.user.model.PostLoginRes
 com/example/demo/src/user/UserDao.java
  com.example.demo.src.user.UserDao
-com/example/demo/src/survey/SurveyService.java
- com.example.demo.src.survey.SurveyService
+com/example/demo/src/survey/model/GetSurveyRes.java
+ com.example.demo.src.survey.model.GetSurveyRes
 com/example/demo/config/BaseResponseStatus.java
  com.example.demo.config.BaseResponseStatus
 com/example/demo/src/WebSecurityConfig.java
@@ -48,9 +48,9 @@ com/example/demo/src/survey/model/PostSurveyReq.java
  com.example.demo.src.survey.model.PostSurveyReq
 com/example/demo/src/survey/SurveyProvider.java
  com.example.demo.src.survey.SurveyProvider
-com/example/demo/src/survey/SurveyDao.java
- com.example.demo.src.survey.SurveyDao
-com/example/demo/src/survey/model/GetSurveyRes.java
- com.example.demo.src.survey.model.GetSurveyRes
 com/example/demo/src/survey/SurveyController.java
  com.example.demo.src.survey.SurveyController
+com/example/demo/src/survey/SurveyService.java
+ com.example.demo.src.survey.SurveyService
+com/example/demo/src/survey/SurveyDao.java
+ com.example.demo.src.survey.SurveyDao
