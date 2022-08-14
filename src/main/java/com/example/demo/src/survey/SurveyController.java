@@ -2,6 +2,9 @@ package com.example.demo.src.survey;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
+import com.example.demo.config.BaseResponseStatus;
+import com.example.demo.src.survey.model.PostSurveyReq;
+import com.example.demo.src.survey.model.PostSurveyRes;
 import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +48,49 @@ public class SurveyController {
         }
     }
 
+
+    @ResponseBody
+    @PostMapping("") // (GET) 127.0.0.1:9000/users
+    public BaseResponse<PostSurveyRes> createSurvey(@RequestBody PostSurveyReq postSurveyReq) {
+        try{
+            if(postSurveyReq.getSurveyIntroduction().length()>300)
+            {
+                return new BaseResponse<>(BaseResponseStatus.POST_SURVEY_INVALID_INTRODUCTION);
+            }
+
+            if(postSurveyReq.getSurveyTitle().length()<1)
+            {
+                return new BaseResponse<>(BaseResponseStatus.POST_SURVEY_EMPTY_TITLE);
+            }
+            if(postSurveyReq.getSurveyTitle().length()>30)
+            {
+                return new BaseResponse<>(BaseResponseStatus.POST_SURVEY_INVALID_TITLE);
+            }
+            if(postSurveyReq.getDeadlineAt().length()<1)
+            {
+                return new BaseResponse<>(BaseResponseStatus.POST_SURVEY_EMPTY_DEADLINE);
+            }
+            if(postSurveyReq.getSurveyTime()<1)
+            {
+                return new BaseResponse<>(BaseResponseStatus.POST_SURVEY_EMPTY_SURVEYTIME);
+            }
+
+            if(postSurveyReq.getHashtag().length()>45)
+            {
+                return new BaseResponse<>(BaseResponseStatus.POST_SURVEY_INVALID_HASHTAG);
+            }
+
+            if(postSurveyReq.getSurveyQuestion().size()<1)
+            {
+                return new BaseResponse<>(BaseResponseStatus.POST_SURVEY_EMPTY_QUESTION);
+            }
+
+            PostSurveyRes postSurveyRes = surveyService.createSurvey(postSurveyReq.getUserIdx(),postSurveyReq);
+            return new BaseResponse<>(postSurveyRes);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
 
 
     @ResponseBody

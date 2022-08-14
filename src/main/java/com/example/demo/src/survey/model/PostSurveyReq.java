@@ -12,7 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 public class PostSurveyReq {
     private int userIdx;
-    private List<PostSurveyQuestionReq> surveyQuestionReqs;
-
-
+    private String surveyIntroduction;
+    private String surveyTitle;
+    private int surveyCategoryIdx;
+    private List<PostSurveyQuestionReq> surveyQuestion;
+    private String deadlineAt;
+    private String preferGender;
+    private int preferAge;
+    private int surveyTime;
+    private String hashtag;
+    private int surveyPointValue;
+    private int couponIdx;
 }

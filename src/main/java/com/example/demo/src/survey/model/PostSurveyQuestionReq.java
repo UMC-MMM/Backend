@@ -11,8 +11,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class PostSurveyQuestionReq {
-    private int userIdx;
-    private List<PostSurveyQuestionReq> surveyQuestionReqs;
-
-
+    private String questionType;
+    private String questionContent;
 }

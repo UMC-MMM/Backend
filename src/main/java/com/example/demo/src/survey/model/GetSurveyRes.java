@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,7 +16,7 @@ public class GetSurveyRes {
     private String surveyTitle;
     private String createdAt;
     private String deadlineAt;
-    private String writerId;
+    //private String writerId;
     private String preferGender;
     private int preferAge;
     private int surveyTime;

@@ -12,6 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 public class PostSurveyRes {
     private int surveyIdx;
-    //private List
 
 }
