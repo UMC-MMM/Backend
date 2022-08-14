@@ -28,6 +28,7 @@ public class SurveyDao {
                 "SELECT surveyIdx, surveyTitle, createdAt, deadlineAt, writerId, preferGender, preferAge,\n" +
                         "       surveyTime, hashtag, surveyCategoryIdx, surveyPointValue, totalParticipant\n" +
                         "FROM Survey WHERE surveyStatus ='A';";
+
         return this.jdbcTemplate.query(selectSurveyQuery,
                 (rs,rowNum) -> new GetSurveyRes(
                         rs.getInt("surveyIdx"),
@@ -43,7 +44,7 @@ public class SurveyDao {
                         rs.getInt("surveyPointValue"),
                         rs.getInt("totalParticipant"),
                         rs.getInt("userIdx")
-                ),null);
+                ));
     }
 
     public int deleteSurvey(int surveyIdx){

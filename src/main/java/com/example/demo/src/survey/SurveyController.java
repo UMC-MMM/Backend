@@ -36,7 +36,7 @@ public class SurveyController {
 
     @ResponseBody
     @GetMapping("")
-    public BaseResponse<List<GetSurveyRes>> getSurvey() { //여러 설문조사 볼 수 있으므로 list
+    public BaseResponse<List<GetSurveyRes>> getSurvey() { //여러 게시글 볼 수 있으므로 list, 따로 받을 값 없으므로 파라미터 비움
         try {
             List<GetSurveyRes> getSurveyRes = surveyProvider.retrieveSurvey();
             return new BaseResponse<>(getSurveyRes);
