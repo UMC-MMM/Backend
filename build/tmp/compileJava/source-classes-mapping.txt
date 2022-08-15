@@ -26,10 +26,14 @@ com/example/demo/src/test/TestController.java
  com.example.demo.src.test.TestController
 com/example/demo/src/survey/model/PostSurveyRes.java
  com.example.demo.src.survey.model.PostSurveyRes
-com/example/demo/utils/JwtService.java
- com.example.demo.utils.JwtService
-com/example/demo/src/user/UserProvider.java
- com.example.demo.src.user.UserProvider
+com/example/demo/src/survey/model/PostSurveyReq.java
+ com.example.demo.src.survey.model.PostSurveyReq
+com/example/demo/src/survey/model/PostSurveyQuestionReq.java
+ com.example.demo.src.survey.model.PostSurveyQuestionReq
+com/example/demo/src/survey/SurveyProvider.java
+ com.example.demo.src.survey.SurveyProvider
+com/example/demo/src/survey/SurveyController.java
+ com.example.demo.src.survey.SurveyController
 com/example/demo/src/user/UserController.java
  com.example.demo.src.user.UserController
 com/example/demo/config/BaseResponse.java
@@ -40,16 +44,14 @@ com/example/demo/src/user/UserService.java
  com.example.demo.src.user.UserService
 com/example/demo/config/BaseResponseStatus.java
  com.example.demo.config.BaseResponseStatus
-com/example/demo/src/survey/model/PostSurveyReq.java
- com.example.demo.src.survey.model.PostSurveyReq
+com/example/demo/src/survey/model/GetSurveyContentRes.java
+ com.example.demo.src.survey.model.GetSurveyContentRes
 com/example/demo/config/BaseException.java
  com.example.demo.config.BaseException
-com/example/demo/src/survey/SurveyProvider.java
- com.example.demo.src.survey.SurveyProvider
-com/example/demo/src/survey/SurveyController.java
- com.example.demo.src.survey.SurveyController
-com/example/demo/src/survey/model/PostSurveyQuestionReq.java
- com.example.demo.src.survey.model.PostSurveyQuestionReq
+com/example/demo/utils/JwtService.java
+ com.example.demo.utils.JwtService
+com/example/demo/src/user/UserProvider.java
+ com.example.demo.src.user.UserProvider
 com/example/demo/src/survey/SurveyService.java
  com.example.demo.src.survey.SurveyService
 com/example/demo/src/survey/SurveyDao.java

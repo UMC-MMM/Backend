@@ -99,7 +99,7 @@ public class SurveyController {
         try{
 
             surveyService.deleteSurvey(surveyIdx);
-            String result = "삭제를 성공했습니다.";
+            String result = "게시물 삭제에 성공했습니다.";
             return new BaseResponse<>(result);
         } catch(BaseException exception){
             return new BaseResponse<>((exception.getStatus()));

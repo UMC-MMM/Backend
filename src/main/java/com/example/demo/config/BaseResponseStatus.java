@@ -48,6 +48,8 @@ public enum BaseResponseStatus {
     POST_SURVEY_EMPTY_CONTENT(false,2040,"문항의 내용을 입력하세요."),
 
 
+
+
     /**
      * 3000 : Response 오류
      */
