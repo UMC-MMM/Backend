@@ -36,6 +36,18 @@ public enum BaseResponseStatus {
 
     POST_USERS_EMPTY_PASSWORD(false, 2030, "비밀번호를 입력해주세요."),
     POST_USERS_INVALID_PASSWORD(false, 2031, "비밀번호 형식을 확인해주세요."),
+
+    POST_SURVEY_EMPTY_TITLE(false, 2032, "제목을 입력하세요."),
+    POST_SURVEY_INVALID_TITLE(false, 2033, "입력하신 제목의 글자 수가 허용된 범위를 초과하였습니다."),
+
+    POST_SURVEY_EMPTY_DEADLINE(false, 2034,"마감일을 입력하세요."),
+    POST_SURVEY_EMPTY_SURVEYTIME(false, 2035, "설문 소요 시간을 입력하세요."),
+    POST_SURVEY_INVALID_INTRODUCTION(false, 2037, "입력하신 소개글의 글자 수가 허용된 범위를 초과하였습니다."),
+    POST_SURVEY_EMPTY_QUESTION(false, 2038, "문항을 추가하세요."),
+    POST_SURVEY_INVALID_HASHTAG(false, 2039,"입력하신 해시태그의 글자 수가 허용된 범위를 초과하였습니다."),
+    POST_SURVEY_EMPTY_CONTENT(false,2040,"문항의 내용을 입력하세요."),
+
+
     /**
      * 3000 : Response 오류
      */
@@ -58,8 +70,8 @@ public enum BaseResponseStatus {
     MODIFY_FAIL_USERNAME(false,4014,"유저네임 수정 실패"),
 
     //Post /posts
-    MODIFY_FAIL_POST(false,4015,"게시글내용 수정에 실패하였습니다."),
-    DELETE_FAIL_POST(false,4016,"게시글 삭제에 실패하였습니다."),
+    MODIFY_FAIL_POST(false,4015,"설문조사 내용 수정에 실패하였습니다."),
+    DELETE_FAIL_POST(false,4016,"설문조사 삭제에 실패하였습니다."),
     PASSWORD_ENCRYPTION_ERROR(false, 4011, "비밀번호 암호화에 실패하였습니다."),
     PASSWORD_DECRYPTION_ERROR(false, 4012, "비밀번호 복호화에 실패하였습니다.");
 
