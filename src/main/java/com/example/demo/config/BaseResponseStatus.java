@@ -73,12 +73,14 @@ public enum BaseResponseStatus {
     MODIFY_FAIL_POST(false,4015,"설문조사 내용 수정에 실패하였습니다."),
     DELETE_FAIL_POST(false,4016,"설문조사 삭제에 실패하였습니다."),
     PASSWORD_ENCRYPTION_ERROR(false, 4011, "비밀번호 암호화에 실패하였습니다."),
-    PASSWORD_DECRYPTION_ERROR(false, 4012, "비밀번호 복호화에 실패하였습니다.");
+    PASSWORD_DECRYPTION_ERROR(false, 4012, "비밀번호 복호화에 실패하였습니다."),
 
 
     // 5000 : 필요시 만들어서 쓰세요
-    // 6000 : 필요시 만들어서 쓰세요
 
+    TOTAL_POINT_MINUS(false, 5000, "포인트의 총합이 마이너스입니다.");
+
+    // 6000 : 필요시 만들어서 쓰세요
 
     private final boolean isSuccess;
     private final int code;

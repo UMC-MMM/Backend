@@ -1,5 +1,6 @@
 package com.example.demo.src.user;
 
+import com.example.demo.src.user.model.GetPointRes;
 import com.example.demo.src.user.model.PostLoginReq;
 import com.example.demo.src.user.model.PostUserReq;
 import com.example.demo.src.user.model.UserInfo;
@@ -8,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Repository
 public class UserDao {
@@ -71,5 +73,42 @@ public class UserDao {
                         rs.getString("userEmail")
                 ),
                 getPwdParams);
+    }
+    public List<GetPointRes> selectUserPointPlus(int userIdx){
+        String selectUserPointPlusQuery =
+                "select pointIdx,pointValue,createdAt,pointContent from PointPlus where userIdx=? \n" +
+                "order by PointPlus.createdAt desc";
+        int selectUserPointPlusParam = userIdx;
+        return this.jdbcTemplate.query(selectUserPointPlusQuery,
+                (rs,rowNum) -> new GetPointRes(
+                        rs.getInt("pointIdx"),
+                        rs.getInt("pointValue"),
+                        rs.getString("createdAt"),
+                        rs.getString("pointContent")
+                ),selectUserPointPlusParam);
+    }
+    public List<GetPointRes> selectUserPointMinus(int userIdx){
+        String selectUserPointMinusQuery =
+                "select pointIdx,pointValue,usedAt,pointContent from PointMinus where userIdx=? \n" +
+                "order by PointMinus.usedAt desc";
+        int selectUserPointMinusParam = userIdx;
+        return this.jdbcTemplate.query(selectUserPointMinusQuery,
+                (rs,rowNum) -> new GetPointRes(
+                        rs.getInt("pointIdx"),
+                        rs.getInt("pointValue"),
+                        rs.getString("usedAt"),
+                        rs.getString("pointContent")
+                ),selectUserPointMinusParam);
+    }
+    public int getPointPlusSum(int userIdx){
+        String getPointPlusSumQuery = "select SUM(pointValue) from PointPlus where userIdx=?";
+        int getPointPlusSumParam = userIdx;
+        return this.jdbcTemplate.queryForObject(getPointPlusSumQuery,int.class,getPointPlusSumParam);
+    }
+
+    public int getPointMinusSum(int userIdx){
+        String getPointMinusSumQuery = "select SUM(pointValue) from PointMinus where userIdx=?";
+        int getPointMinusSumParam = userIdx;
+        return this.jdbcTemplate.queryForObject(getPointMinusSumQuery,int.class,getPointMinusSumParam);
     }
 }

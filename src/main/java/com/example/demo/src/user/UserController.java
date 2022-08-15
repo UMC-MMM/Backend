@@ -3,10 +3,7 @@ package com.example.demo.src.user;
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 
-import com.example.demo.src.user.model.PostLoginReq;
-import com.example.demo.src.user.model.PostLoginRes;
-import com.example.demo.src.user.model.PostUserReq;
-import com.example.demo.src.user.model.PostUserRes;
+import com.example.demo.src.user.model.*;
 import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,6 +78,23 @@ public class UserController {
         } catch (BaseException exception) {
             return new BaseResponse<>(exception.getStatus());
         }
+    }
+
+
+    /**
+     * 포인트 조회 api
+     */
+    @ResponseBody
+    @GetMapping("/{userIdx}/point")
+    public BaseResponse<GetUserPointRes> getUserPoint(@PathVariable ("userIdx") int userIdx)  {
+
+        try {
+            GetUserPointRes getUserPointRes = userProvider.getUserPoint(userIdx);
+            return new BaseResponse<>(getUserPointRes);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+
     }
 }
 
