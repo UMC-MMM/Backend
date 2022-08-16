@@ -7,7 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class SurveyDao {
@@ -90,6 +93,20 @@ public class SurveyDao {
         return this.jdbcTemplate.queryForObject(checkUserExistQuery,
                 int.class,
                 checkUserExistParams);
+
+    }
+
+    public List<String> selectSurveyCategoryList(){
+        String selectSurveyCategoryListQuery = "select surveyCategoryTitle from SurveyCategory";
+        List list = this.jdbcTemplate.queryForList(selectSurveyCategoryListQuery);
+        List surveyCategoryList = new ArrayList();
+        for (Iterator it = list.iterator(); it.hasNext();){
+            Map map = (Map)it.next();
+            String surveyCategory = (String)map.get("SurveyCategoryTitle");
+            System.out.println(surveyCategory);
+            surveyCategoryList.add(surveyCategory);
+        }
+        return surveyCategoryList;
 
     }
 
