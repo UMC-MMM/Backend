@@ -39,7 +39,6 @@ public class SurveyDao {
                         rs.getString("surveyTitle"),
                         rs.getString("createdAt"),
                         rs.getString("deadlineAt"),
-                        //rs.getString("writerId"),
                         rs.getString("preferGender"),
                         rs.getInt("preferAge"),
                         rs.getInt("surveyTime"),
@@ -73,9 +72,11 @@ public class SurveyDao {
     설문조사 질문
      */
     public int insertSurveyQuestion(int surveyIdx, PostSurveyQuestionReq postSurveyQuestionReq){
-        String insertSurveyQuestionQuery = "INSERT INTO SurveyQuestion(surveyIdx, questionType) VALUES (?,?);";
-        Object [] insertSurveyQuestionParams = new Object[] {surveyIdx, postSurveyQuestionReq.getQuestionType()};
+        String insertSurveyQuestionQuery = "INSERT INTO SurveyQuestion(surveyIdx, questionType, questionContent) VALUES (?,?,?);";
+        Object [] insertSurveyQuestionParams = new Object[] {surveyIdx, postSurveyQuestionReq.getQuestionType(),
+        postSurveyQuestionReq.getQuestionContent()};
         this.jdbcTemplate.update(insertSurveyQuestionQuery, insertSurveyQuestionParams);
+
 
         String lastInsertIdxQuery = "select last_insert_id()";
         return this.jdbcTemplate.queryForObject(lastInsertIdxQuery,int.class);
@@ -87,8 +88,10 @@ public class SurveyDao {
     public int insertSurveyQuestionOption(int questionIdx, PostSurveyQuestionOptionReq postSurveyQuestionOptionReq){
         String insertSurveyQuestionOptionQuery = "INSERT INTO SurveyQuestionOption(questionIdx, OptionContent) VALUES (?,?);";
         Object [] insertSurveyQuestionOptionParams = new Object[] {questionIdx, postSurveyQuestionOptionReq.getOptionContent()};
-        System.out.println(postSurveyQuestionOptionReq.getOptionContent());
+
         this.jdbcTemplate.update(insertSurveyQuestionOptionQuery, insertSurveyQuestionOptionParams);
+
+        System.out.println(postSurveyQuestionOptionReq.getOptionContent());
 
         String lastInsertIdxQuery = "select last_insert_id()";
         return this.jdbcTemplate.queryForObject(lastInsertIdxQuery,int.class);

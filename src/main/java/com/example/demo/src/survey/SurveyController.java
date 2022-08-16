@@ -55,9 +55,16 @@ public class SurveyController {
 설문조사 등록
  */
     @ResponseBody
-    @PostMapping("") // (GET) 127.0.0.1:9000/users
-    public BaseResponse<PostSurveyRes> createSurvey(@RequestBody PostSurveyReq postSurveyReq, PostSurveyQuestionReq postSurveyQuestionReq) {
+    @PostMapping("")
+    public BaseResponse<PostSurveyRes> createSurvey(@RequestBody PostSurveyReq postSurveyReq) {
         try{
+
+            int userIdxByJwt = jwtService.getUserIdx();
+            if(postSurveyReq.getUserIdx()!=userIdxByJwt){
+                return new BaseResponse<>(BaseResponseStatus.INVALID_USER_JWT);
+            }
+
+
 /*
             if(postSurveyQuestionReq.getQuestionType().length()<1)
             {
@@ -97,7 +104,7 @@ public class SurveyController {
                 return new BaseResponse<>(BaseResponseStatus.POST_SURVEY_EMPTY_QUESTION);
             }
 
-            PostSurveyRes postSurveyRes = surveyService.createSurvey(postSurveyReq.getUserIdx(),postSurveyReq,postSurveyQuestionReq);
+            PostSurveyRes postSurveyRes = surveyService.createSurvey(postSurveyReq.getUserIdx(),postSurveyReq);
             return new BaseResponse<>(postSurveyRes);
         } catch(BaseException exception){
             return new BaseResponse<>((exception.getStatus()));
@@ -111,6 +118,7 @@ public class SurveyController {
     @PatchMapping("/{surveyIdx}/status")
     public BaseResponse<String> deleteSurvey(@PathVariable("surveyIdx") int surveyIdx) {
         try{
+
 
             surveyService.deleteSurvey(surveyIdx);
             String result = "게시글 삭제에 성공했습니다.";

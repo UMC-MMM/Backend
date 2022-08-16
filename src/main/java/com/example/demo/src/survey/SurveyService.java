@@ -1,10 +1,9 @@
 package com.example.demo.src.survey;
 
 import com.example.demo.config.BaseException;
-import com.example.demo.src.survey.model.PostSurveyQuestionReq;
-import com.example.demo.src.survey.model.PostSurveyQuestionRes;
-import com.example.demo.src.survey.model.PostSurveyReq;
-import com.example.demo.src.survey.model.PostSurveyRes;
+import com.example.demo.config.BaseResponse;
+import com.example.demo.config.BaseResponseStatus;
+import com.example.demo.src.survey.model.*;
 import com.example.demo.src.user.UserDao;
 import com.example.demo.src.user.UserProvider;
 import com.example.demo.src.user.model.*;
@@ -34,7 +33,7 @@ public class SurveyService {
     /*
     설문조사 등록
     */
-    public PostSurveyRes createSurvey(int userIdx, PostSurveyReq postSurveyReq, PostSurveyQuestionReq postSurveyQuestionReq) throws BaseException{
+    public PostSurveyRes createSurvey(int userIdx, PostSurveyReq postSurveyReq) throws BaseException{
 
         try{
             int surveyIdx = surveyDao.insertSurvey(userIdx, postSurveyReq.getSurveyIntroduction(), postSurveyReq.getSurveyTitle(),
@@ -42,15 +41,12 @@ public class SurveyService {
                     postSurveyReq.getPreferGender(), postSurveyReq.getPreferAge(), postSurveyReq.getSurveyTime(),
                     postSurveyReq.getHashtag(), postSurveyReq.getSurveyPointValue(), postSurveyReq.getCouponIdx());
 
-            for (int i=0; i<postSurveyReq.getSurveyQuestion().size(); i++){
-                int questionIdx = surveyDao.insertSurveyQuestion(surveyIdx, postSurveyQuestionReq);
-
-                for (int j=0; j<postSurveyQuestionReq.getPostQuestionOption().size(); j++){
-                    surveyDao.insertSurveyQuestionOption(questionIdx, postSurveyQuestionReq.getPostQuestionOption().get(j));
-                } //질문 옵션 여러 개 등록(객관식, 체크박스)
-
-                surveyDao.insertSurveyQuestion(surveyIdx, postSurveyReq.getSurveyQuestion().get(i));
-            } //질문 여러 개 등록
+            for (PostSurveyQuestionReq question : postSurveyReq.getSurveyQuestion()){
+                int questionIdx = surveyDao.insertSurveyQuestion(surveyIdx, question);
+                for(PostSurveyQuestionOptionReq option : question.getPostQuestionOption()){
+                    surveyDao.insertSurveyQuestionOption(questionIdx, option);
+                }
+            }
             return new PostSurveyRes(surveyIdx);
         }
         catch (Exception exception) {
