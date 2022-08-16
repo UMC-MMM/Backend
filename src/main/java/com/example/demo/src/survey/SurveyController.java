@@ -38,7 +38,7 @@ public class SurveyController {
 
     @ResponseBody
     @GetMapping("")
-    public BaseResponse<List<GetSurveyRes>> getSurvey() { //여러 게시글 볼 수 있으므로 list, 따로 받을 값 없으므로 파라미터 비움
+    public BaseResponse<List<GetSurveyRes>> getSurveys() { //여러 게시글 볼 수 있으므로 list, 따로 받을 값 없으므로 파라미터 비움
         try {
             List<GetSurveyRes> getSurveyRes = surveyProvider.retrieveSurvey();
             return new BaseResponse<>(getSurveyRes);
@@ -49,7 +49,7 @@ public class SurveyController {
 
 
     @ResponseBody
-    @PostMapping("") // (GET) 127.0.0.1:9000/users
+    @PostMapping("") // (GET) 127.0.0.1:9000/survey
     public BaseResponse<PostSurveyRes> createSurvey(@RequestBody PostSurveyReq postSurveyReq) {
         try{
             if(postSurveyReq.getSurveyIntroduction().length()>300)
@@ -104,7 +104,16 @@ public class SurveyController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-
+    @ResponseBody
+    @GetMapping("/{surveyIdx}")//(GET) 127.0.0.1:9000/survey/{surveyIdx}
+    public BaseResponse<GetSurvey> getSurvey(@PathVariable("surveyIdx") int surveyIdx) {
+        try {
+            GetSurvey getSurvey = surveyProvider.getSurvey(surveyIdx);
+            return new BaseResponse<>(getSurvey);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
     @ResponseBody
     @PostMapping("/{surveyIdx}") // (Post) 127.0.0.1:9000/survey/{surveyIdx}
     public BaseResponse<String> createSurveyAnswer(@PathVariable("surveyIdx") int surveyIdx, @RequestBody PostSurveyAnswerReq postSurveyAnswerReq) {
