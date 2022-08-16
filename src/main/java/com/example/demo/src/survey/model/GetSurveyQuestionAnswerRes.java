@@ -11,5 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 public class GetSurveyQuestionAnswerRes {
     private String questionType;
-    private Object questionAnswer;
+    private String questionAnswer;
 }
