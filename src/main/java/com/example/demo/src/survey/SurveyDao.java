@@ -69,6 +69,9 @@ public class SurveyDao {
 
     }
 
+    /*
+    설문조사 질문
+     */
     public int insertSurveyQuestion(int surveyIdx, PostSurveyQuestionReq postSurveyQuestionReq){
         String insertSurveyQuestionQuery = "INSERT INTO SurveyQuestion(surveyIdx, questionType) VALUES (?,?);";
         Object [] insertSurveyQuestionParams = new Object[] {surveyIdx, postSurveyQuestionReq.getQuestionType()};
@@ -78,10 +81,13 @@ public class SurveyDao {
         return this.jdbcTemplate.queryForObject(lastInsertIdxQuery,int.class);
 
     }
-
+    /*
+    설문조사 질문 옵션(객관식, 체크박스)
+    */
     public int insertSurveyQuestionOption(int questionIdx, PostSurveyQuestionOptionReq postSurveyQuestionOptionReq){
         String insertSurveyQuestionOptionQuery = "INSERT INTO SurveyQuestionOption(questionIdx, OptionContent) VALUES (?,?);";
         Object [] insertSurveyQuestionOptionParams = new Object[] {questionIdx, postSurveyQuestionOptionReq.getOptionContent()};
+        System.out.println(postSurveyQuestionOptionReq.getOptionContent());
         this.jdbcTemplate.update(insertSurveyQuestionOptionQuery, insertSurveyQuestionOptionParams);
 
         String lastInsertIdxQuery = "select last_insert_id()";

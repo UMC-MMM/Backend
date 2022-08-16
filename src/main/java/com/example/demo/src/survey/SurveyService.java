@@ -31,7 +31,9 @@ public class SurveyService {
         this.jwtService = jwtService;
 
     }
-
+    /*
+    설문조사 등록
+    */
     public PostSurveyRes createSurvey(int userIdx, PostSurveyReq postSurveyReq, PostSurveyQuestionReq postSurveyQuestionReq) throws BaseException{
 
         try{
@@ -45,10 +47,10 @@ public class SurveyService {
 
                 for (int j=0; j<postSurveyQuestionReq.getPostQuestionOption().size(); j++){
                     surveyDao.insertSurveyQuestionOption(questionIdx, postSurveyQuestionReq.getPostQuestionOption().get(j));
-                }
+                } //질문 옵션 여러 개 등록(객관식, 체크박스)
 
                 surveyDao.insertSurveyQuestion(surveyIdx, postSurveyReq.getSurveyQuestion().get(i));
-            }
+            } //질문 여러 개 등록
             return new PostSurveyRes(surveyIdx);
         }
         catch (Exception exception) {
