@@ -11,4 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PostSurveyQuestionOptionReq {
     private String OptionContent;
+
 }
+

@@ -47,6 +47,8 @@ public enum BaseResponseStatus {
     POST_SURVEY_EMPTY_QUESTION(false, 2038, "문항을 추가하세요."),
     POST_SURVEY_INVALID_HASHTAG(false, 2039,"입력하신 해시태그의 글자 수가 허용된 범위를 초과하였습니다."),
     POST_SURVEY_EMPTY_CONTENT(false,2040,"문항의 내용을 입력하세요."),
+    POST_SURVEY_EMPTY_OPTION_CONTENT(false,2041,"선택 옵션 내용을 입력하세요."),
+    POST_SURVEY_EMPTY_QUESTIONTYPE(false,2042,"문항 타입을 선택하세요."),
 
 
 

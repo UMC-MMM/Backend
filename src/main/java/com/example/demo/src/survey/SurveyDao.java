@@ -3,6 +3,7 @@ package com.example.demo.src.survey;
 import com.example.demo.src.survey.model.GetSurveyQuestionOptionRes;
 import com.example.demo.src.survey.model.GetSurveyQuestionRes;
 import com.example.demo.src.survey.model.GetSurveyRes;
+import com.example.demo.src.survey.model.PostSurveyQuestionOptionReq;
 import com.example.demo.src.survey.model.PostSurveyQuestionReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,7 +29,9 @@ public class SurveyDao {
 
 
 
-
+/*
+설문조사 목록
+ */
     public List<GetSurveyRes> selectSurvey(){
         String selectSurveyQuery =
                 "SELECT surveyIdx, surveyTitle, createdAt, deadlineAt, preferGender, preferAge,\n" +
@@ -41,7 +44,6 @@ public class SurveyDao {
                         rs.getString("surveyTitle"),
                         rs.getString("createdAt"),
                         rs.getString("deadlineAt"),
-                        //rs.getString("writerId"),
                         rs.getString("preferGender"),
                         rs.getInt("preferAge"),
                         rs.getInt("surveyTime"),
@@ -53,6 +55,9 @@ public class SurveyDao {
                 ));
     }
 
+    /*
+    설문조사 등록
+     */
     public int insertSurvey(int userIdx, String surveyIntroduction, String surveyTitle,
                             int surveyCategoryIdx, String deadlineAt, String preferGender,
                             int preferAge, int surveyTime, String hashtag, int surveyPointValue, int couponIdx){
@@ -68,11 +73,30 @@ public class SurveyDao {
 
     }
 
+    /*
+    설문조사 질문
+     */
     public int insertSurveyQuestion(int surveyIdx, PostSurveyQuestionReq postSurveyQuestionReq){
         String insertSurveyQuestionQuery = "INSERT INTO SurveyQuestion(surveyIdx, questionType, questionContent) VALUES (?,?,?);";
         Object [] insertSurveyQuestionParams = new Object[] {surveyIdx, postSurveyQuestionReq.getQuestionType(),
-                postSurveyQuestionReq.getQuestionContent()};
+        postSurveyQuestionReq.getQuestionContent()};
         this.jdbcTemplate.update(insertSurveyQuestionQuery, insertSurveyQuestionParams);
+
+
+        String lastInsertIdxQuery = "select last_insert_id()";
+        return this.jdbcTemplate.queryForObject(lastInsertIdxQuery,int.class);
+
+    }
+    /*
+    설문조사 질문 옵션(객관식, 체크박스)
+    */
+    public int insertSurveyQuestionOption(int questionIdx, PostSurveyQuestionOptionReq postSurveyQuestionOptionReq){
+        String insertSurveyQuestionOptionQuery = "INSERT INTO SurveyQuestionOption(questionIdx, OptionContent) VALUES (?,?);";
+        Object [] insertSurveyQuestionOptionParams = new Object[] {questionIdx, postSurveyQuestionOptionReq.getOptionContent()};
+
+        this.jdbcTemplate.update(insertSurveyQuestionOptionQuery, insertSurveyQuestionOptionParams);
+
+        System.out.println(postSurveyQuestionOptionReq.getOptionContent());
 
         String lastInsertIdxQuery = "select last_insert_id()";
         return this.jdbcTemplate.queryForObject(lastInsertIdxQuery,int.class);
@@ -80,7 +104,9 @@ public class SurveyDao {
     }
 
 
-
+/*
+설문조사 삭제
+ */
     public int deleteSurvey(int surveyIdx){
         String deleteSurveyQuery = "UPDATE Survey SET surveyStatus='INACTIVE' WHERE surveyIdx=?";
         Object [] deleteSurveyParams = new Object[] {surveyIdx};

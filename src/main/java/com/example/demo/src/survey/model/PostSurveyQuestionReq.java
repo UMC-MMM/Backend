@@ -10,4 +10,6 @@ public class PostSurveyQuestionReq {
     private String questionType;
     private String questionContent;
     private List<PostSurveyQuestionOptionReq> postQuestionOption;
+
 }
+
