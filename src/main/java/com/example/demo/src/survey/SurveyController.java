@@ -3,14 +3,13 @@ package com.example.demo.src.survey;
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 import com.example.demo.config.BaseResponseStatus;
-import com.example.demo.src.survey.model.PostSurveyReq;
-import com.example.demo.src.survey.model.PostSurveyRes;
+import com.example.demo.src.survey.model.*;
 import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.src.survey.model.GetSurveyRes;
+
 import java.util.List;
 
 @RestController
@@ -101,6 +100,22 @@ public class SurveyController {
             surveyService.deleteSurvey(surveyIdx);
             String result = "삭제를 성공했습니다.";
             return new BaseResponse<>(result);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    @ResponseBody
+    @PostMapping("/{surveyIdx}") // (Post) 127.0.0.1:9000/survey/{surveyIdx}
+    public BaseResponse<String> createSurveyAnswer(@PathVariable("surveyIdx") int surveyIdx, @RequestBody PostSurveyAnswerReq postSurveyAnswerReq) {
+        try{
+            int userIdxByJwt = jwtService.getUserIdx();
+            if(postSurveyAnswerReq.getUserIdx()!=userIdxByJwt){
+                return new BaseResponse<>(BaseResponseStatus.INVALID_USER_JWT);
+            }
+
+            BaseResponse<String> result = surveyService.createSurveyAnswer(postSurveyAnswerReq.getUserIdx(),surveyIdx,postSurveyAnswerReq);
+            return result;
         } catch(BaseException exception){
             return new BaseResponse<>((exception.getStatus()));
         }

@@ -110,6 +110,22 @@ public class SurveyDao {
 
     }
 
+    public String getQuestionType(int questionIdx){
+        String getQuestionTypeQuery ="SELECT questionType FROM SurveyQuestion WHERE questionIdx=?";
+        int getQuestionTypeParam = questionIdx;
+        return this.jdbcTemplate.queryForObject(getQuestionTypeQuery,String.class,getQuestionTypeParam);
+    }
+
+    public void insertSurveyEssayAnswer(int userIdx, int questionIdx, String questionAnswer){
+        String insertSurveyEssayAnswerQuery = "INSERT INTO SurveyEssayAnswer(userIdx, questionIdx, essayAnswerContent) values (?, ?, ?)";
+        Object [] insertSurveyEssayAnswerParams = new Object[] {userIdx, questionIdx,questionAnswer};
+        this.jdbcTemplate.update(insertSurveyEssayAnswerQuery, insertSurveyEssayAnswerParams);
+    }
+    public void insertSurveyCheckboxAnswer(int userIdx,int questionIdx,int checkedOptionAnswerIdx){
+        String insertSurveyCheckboxAnswerQuery = "INSERT INTO SurveyCheckedAnswer (userIdx, questionIdx, checkedOptionAnswerIdx) VALUES (?, ?, ?)";
+        Object [] insertSurveyCheckboxAnswerParams = new Object[] {userIdx, questionIdx,checkedOptionAnswerIdx};
+        this.jdbcTemplate.update(insertSurveyCheckboxAnswerQuery, insertSurveyCheckboxAnswerParams);
+    }
 }
 
 
