@@ -1,6 +1,8 @@
 package com.example.demo.src.survey;
 
 import com.example.demo.config.BaseException;
+import com.example.demo.src.survey.model.GetSurvey;
+import com.example.demo.src.survey.model.GetSurveyQuestionRes;
 import com.example.demo.src.survey.model.GetSurveyRes;
 import com.example.demo.src.user.UserDao;
 import com.example.demo.utils.JwtService;
@@ -10,8 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.example.demo.config.BaseResponseStatus.DATABASE_ERROR;
-import static com.example.demo.config.BaseResponseStatus.USERS_EMPTY_USER_ID;
+import static com.example.demo.config.BaseResponseStatus.*;
 
 @Service
 public class SurveyProvider {
@@ -52,7 +53,21 @@ public class SurveyProvider {
 
     public int checkSurveyExist(int surveyIdx) throws BaseException{
         try{
-            return surveyDao.checkUserExist(surveyIdx);
+            return surveyDao.checkSurveyExist(surveyIdx);
+        } catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public GetSurvey getSurvey(int surveyIdx)throws BaseException{
+        try{
+            if(checkSurveyExist(surveyIdx)==0){
+                throw new BaseException(SURVEY_NOT_EXIST);
+            }
+            GetSurveyRes getSurveyRes =  surveyDao.selectSurveyOne(surveyIdx);
+            List<GetSurveyQuestionRes> getSurveyQuestionRes = surveyDao.selectSurveyQuestions(surveyIdx);
+            GetSurvey getSurvey = new GetSurvey(getSurveyRes, getSurveyQuestionRes);
+            return getSurvey;
         } catch (Exception exception){
             throw new BaseException(DATABASE_ERROR);
         }

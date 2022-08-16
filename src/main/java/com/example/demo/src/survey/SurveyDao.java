@@ -1,5 +1,7 @@
 package com.example.demo.src.survey;
 
+import com.example.demo.src.survey.model.GetSurveyQuestionOptionRes;
+import com.example.demo.src.survey.model.GetSurveyQuestionRes;
 import com.example.demo.src.survey.model.GetSurveyRes;
 import com.example.demo.src.survey.model.PostSurveyQuestionReq;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ public class SurveyDao {
 
     private JdbcTemplate jdbcTemplate;
     private List<GetSurveyRes> getSurveyRes;
-
+    private List<GetSurveyQuestionOptionRes> getOptions;
     @Autowired
     public void setDataSource(DataSource dataSource){
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -95,6 +97,14 @@ public class SurveyDao {
                 checkUserExistParams);
 
     }
+    public int checkSurveyExist(int surveyIdx){
+        String checkSurveyExistQuery = "select exists(select surveyIdx from Survey where surveyIdx = ?)";
+        int checkSurveyExistParams = surveyIdx;
+        return this.jdbcTemplate.queryForObject(checkSurveyExistQuery,
+                int.class,
+                checkSurveyExistParams);
+
+    }
 
     public List<String> selectSurveyCategoryList(){
         String selectSurveyCategoryListQuery = "select surveyCategoryTitle from SurveyCategory";
@@ -110,6 +120,58 @@ public class SurveyDao {
 
     }
 
+    public String getQuestionType(int questionIdx){
+        String getQuestionTypeQuery ="SELECT questionType FROM SurveyQuestion WHERE questionIdx=?";
+        int getQuestionTypeParam = questionIdx;
+        return this.jdbcTemplate.queryForObject(getQuestionTypeQuery,String.class,getQuestionTypeParam);
+    }
+
+    public void insertSurveyEssayAnswer(int userIdx, int questionIdx, String questionAnswer){
+        String insertSurveyEssayAnswerQuery = "INSERT INTO SurveyEssayAnswer(userIdx, questionIdx, essayAnswerContent) values (?, ?, ?)";
+        Object [] insertSurveyEssayAnswerParams = new Object[] {userIdx, questionIdx,questionAnswer};
+        this.jdbcTemplate.update(insertSurveyEssayAnswerQuery, insertSurveyEssayAnswerParams);
+    }
+    public void insertSurveyCheckboxAnswer(int userIdx,int questionIdx,int checkedOptionAnswerIdx){
+        String insertSurveyCheckboxAnswerQuery = "INSERT INTO SurveyCheckedAnswer (userIdx, questionIdx, checkedOptionAnswerIdx) VALUES (?, ?, ?)";
+        Object [] insertSurveyCheckboxAnswerParams = new Object[] {userIdx, questionIdx,checkedOptionAnswerIdx};
+        this.jdbcTemplate.update(insertSurveyCheckboxAnswerQuery, insertSurveyCheckboxAnswerParams);
+    }
+    public GetSurveyRes selectSurveyOne(int surveyIdx){
+        String selectSurveyQuery =
+                "SELECT surveyIdx, surveyTitle, createdAt, deadlineAt, preferGender, preferAge,\n" +
+                        "       surveyTime, hashtag, surveyCategoryIdx, surveyPointValue, totalParticipant, userIdx\n" +
+                        "FROM Survey WHERE surveyIdx = ? ;";
+        int selectSurveyParam = surveyIdx;
+        return this.jdbcTemplate.queryForObject(selectSurveyQuery,
+                (rs,rowNum) -> new GetSurveyRes(
+                        rs.getInt("surveyIdx"),
+                        rs.getString("surveyTitle"),
+                        rs.getString("createdAt"),
+                        rs.getString("deadlineAt"),
+                        rs.getString("preferGender"),
+                        rs.getInt("preferAge"),
+                        rs.getInt("surveyTime"),
+                        rs.getString("hashtag"),
+                        rs.getInt("surveyCategoryIdx"),
+                        rs.getInt("surveyPointValue"),
+                        rs.getInt("totalParticipant"),
+                        rs.getInt("userIdx")
+                ),selectSurveyParam);
+    }
+    public List<GetSurveyQuestionRes>selectSurveyQuestions(int surveyIdx){
+        String selectSurveyQuestionsQuery = "SELECT questionType, questionContent, questionIdx FROM SurveyQuestion WHERE surveyIdx = ?";
+        String selectSurveyOptionsQuery = "SELECT optionIdx, optionContent FROM SurveyQuestionOption WHERE questionIdx = ?";
+        int selectSurveyQuestionsParam = surveyIdx;
+        return this.jdbcTemplate.query(selectSurveyQuestionsQuery,
+                (rs,rowNum) -> new GetSurveyQuestionRes(
+                        rs.getString("questionType"),
+                        rs.getString("questionContent"),
+                        getOptions = this.jdbcTemplate.query(selectSurveyOptionsQuery,
+                                (rk,rownum) -> new GetSurveyQuestionOptionRes(
+                                        rk.getInt("optionIdx"),
+                                        rk.getString("optionContent"))
+                                ,rs.getInt("questionIdx"))),selectSurveyQuestionsParam);
+    }
 }
 
 
