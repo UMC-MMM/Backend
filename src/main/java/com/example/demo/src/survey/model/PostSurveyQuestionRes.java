@@ -12,3 +12,4 @@ public class PostSurveyQuestionRes {
     private int questionIdx;
 
 }
+

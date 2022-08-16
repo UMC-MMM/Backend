@@ -37,6 +37,7 @@ public enum BaseResponseStatus {
     POST_USERS_EMPTY_PASSWORD(false, 2030, "비밀번호를 입력해주세요."),
     POST_USERS_INVALID_PASSWORD(false, 2031, "비밀번호 형식을 확인해주세요."),
 
+    //survey
     POST_SURVEY_EMPTY_TITLE(false, 2032, "제목을 입력하세요."),
     POST_SURVEY_INVALID_TITLE(false, 2033, "입력하신 제목의 글자 수가 허용된 범위를 초과하였습니다."),
 
@@ -50,6 +51,9 @@ public enum BaseResponseStatus {
     POST_SURVEY_EMPTY_QUESTIONTYPE(false,2042,"문항 타입을 선택하세요."),
 
 
+
+
+
     /**
      * 3000 : Response 오류
      */
@@ -60,6 +64,8 @@ public enum BaseResponseStatus {
     DUPLICATED_EMAIL(false, 3013, "중복된 이메일입니다."),
     FAILED_TO_LOGIN(false,3014,"없는 아이디거나 비밀번호가 틀렸습니다."),
 
+    //survey
+    SURVEY_NOT_EXIST(false,3015,"설문조사가 존재하지 않습니다."),
     CHECK_ERROR(false,7777,"test중입니다"),
 
     /**

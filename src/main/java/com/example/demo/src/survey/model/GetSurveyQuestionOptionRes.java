@@ -1,5 +1,4 @@
 package com.example.demo.src.survey.model;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostSurveyQuestionOptionReq {
-    private String OptionContent;
-
+public class GetSurveyQuestionOptionRes {
+    private int optionIdx;
+    private String optionContent;
 }
-
