@@ -1,6 +1,8 @@
 package com.example.demo.src.survey;
 
 import com.example.demo.config.BaseException;
+import com.example.demo.src.survey.model.PostSurveyQuestionReq;
+import com.example.demo.src.survey.model.PostSurveyQuestionRes;
 import com.example.demo.src.survey.model.PostSurveyReq;
 import com.example.demo.src.survey.model.PostSurveyRes;
 import com.example.demo.src.user.UserDao;
@@ -30,21 +32,30 @@ public class SurveyService {
 
     }
 
-    public PostSurveyRes createSurvey(int userIdx, PostSurveyReq postSurveyReq) throws BaseException{
+    public PostSurveyRes createSurvey(int userIdx, PostSurveyReq postSurveyReq, PostSurveyQuestionReq postSurveyQuestionReq) throws BaseException{
 
         try{
             int surveyIdx = surveyDao.insertSurvey(userIdx, postSurveyReq.getSurveyIntroduction(), postSurveyReq.getSurveyTitle(),
                     postSurveyReq.getSurveyCategoryIdx(), postSurveyReq.getDeadlineAt(),
                     postSurveyReq.getPreferGender(), postSurveyReq.getPreferAge(), postSurveyReq.getSurveyTime(),
                     postSurveyReq.getHashtag(), postSurveyReq.getSurveyPointValue(), postSurveyReq.getCouponIdx());
+
             for (int i=0; i<postSurveyReq.getSurveyQuestion().size(); i++){
+                int questionIdx = surveyDao.insertSurveyQuestion(surveyIdx, postSurveyQuestionReq);
+
+                for (int j=0; j<postSurveyQuestionReq.getPostQuestionOption().size(); j++){
+                    surveyDao.insertSurveyQuestionOption(questionIdx, postSurveyQuestionReq.getPostQuestionOption().get(j));
+                }
+
                 surveyDao.insertSurveyQuestion(surveyIdx, postSurveyReq.getSurveyQuestion().get(i));
             }
             return new PostSurveyRes(surveyIdx);
         }
         catch (Exception exception) {
+            System.out.println(exception);
             throw new BaseException(DATABASE_ERROR);
         }
+
 
     }
 
