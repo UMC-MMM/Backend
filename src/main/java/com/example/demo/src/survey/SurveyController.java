@@ -66,7 +66,6 @@ public class SurveyController {
                 return new BaseResponse<>(BaseResponseStatus.INVALID_USER_JWT);
             }
 
-
 /*
             if(postSurveyQuestionReq.getQuestionType().length()<1)
             {
@@ -120,7 +119,6 @@ public class SurveyController {
     @PatchMapping("/{surveyIdx}/status")
     public BaseResponse<String> deleteSurvey(@PathVariable("surveyIdx") int surveyIdx) {
         try{
-
 
             surveyService.deleteSurvey(surveyIdx);
             String result = "게시글 삭제에 성공했습니다.";
