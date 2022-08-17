@@ -6,8 +6,8 @@ com/example/demo/src/user/model/PostUserReq.java
  com.example.demo.src.user.model.PostUserReq
 com/example/demo/config/Constant.java
  com.example.demo.config.Constant
-com/example/demo/src/user/UserProvider.java
- com.example.demo.src.user.UserProvider
+com/example/demo/src/user/model/GetUserProfileRes.java
+ com.example.demo.src.user.model.GetUserProfileRes
 com/example/demo/utils/JwtService.java
  com.example.demo.utils.JwtService
 com/example/demo/src/user/model/PostPointRes.java
@@ -22,8 +22,8 @@ com/example/demo/src/survey/model/GetSurveyQuestionAnswerRes.java
  com.example.demo.src.survey.model.GetSurveyQuestionAnswerRes
 com/example/demo/src/user/model/PostLoginRes.java
  com.example.demo.src.user.model.PostLoginRes
-com/example/demo/src/user/UserDao.java
- com.example.demo.src.user.UserDao
+com/example/demo/src/survey/SurveyService.java
+ com.example.demo.src.survey.SurveyService
 com/example/demo/src/survey/model/GetSurveyRes.java
  com.example.demo.src.survey.model.GetSurveyRes
 com/example/demo/config/BaseResponseStatus.java
@@ -58,8 +58,8 @@ com/example/demo/src/survey/model/PostSurveyQuestionRes.java
  com.example.demo.src.survey.model.PostSurveyQuestionRes
 com/example/demo/src/user/model/PostUserRes.java
  com.example.demo.src.user.model.PostUserRes
-com/example/demo/src/user/UserController.java
- com.example.demo.src.user.UserController
+com/example/demo/src/survey/model/PostSurveyQuestionReq.java
+ com.example.demo.src.survey.model.PostSurveyQuestionReq
 com/example/demo/config/BaseResponse.java
  com.example.demo.config.BaseResponse
 com/example/demo/src/survey/model/GetSurveyQuestionRes.java
@@ -68,8 +68,8 @@ com/example/demo/src/user/model/GetPointRes.java
  com.example.demo.src.user.model.GetPointRes
 com/example/demo/src/home/Models/GetHomeRes.java
  com.example.demo.src.home.Models.GetHomeRes
-com/example/demo/src/user/UserService.java
- com.example.demo.src.user.UserService
+com/example/demo/src/survey/SurveyDao.java
+ com.example.demo.src.survey.SurveyDao
 com/example/demo/src/user/model/UserInfo.java
  com.example.demo.src.user.model.UserInfo
 com/example/demo/src/home/HomeController.java
@@ -78,11 +78,13 @@ com/example/demo/src/survey/SurveyProvider.java
  com.example.demo.src.survey.SurveyProvider
 com/example/demo/src/home/HomeProvider.java
  com.example.demo.src.home.HomeProvider
+com/example/demo/src/user/UserDao.java
+ com.example.demo.src.user.UserDao
+com/example/demo/src/user/UserService.java
+ com.example.demo.src.user.UserService
+com/example/demo/src/user/UserProvider.java
+ com.example.demo.src.user.UserProvider
 com/example/demo/src/survey/SurveyController.java
  com.example.demo.src.survey.SurveyController
-com/example/demo/src/survey/model/PostSurveyQuestionReq.java
- com.example.demo.src.survey.model.PostSurveyQuestionReq
-com/example/demo/src/survey/SurveyDao.java
- com.example.demo.src.survey.SurveyDao
-com/example/demo/src/survey/SurveyService.java
- com.example.demo.src.survey.SurveyService
+com/example/demo/src/user/UserController.java
+ com.example.demo.src.user.UserController

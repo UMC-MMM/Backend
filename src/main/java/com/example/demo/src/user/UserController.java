@@ -3,12 +3,16 @@ package com.example.demo.src.user;
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 
+import com.example.demo.config.BaseResponseStatus;
+import com.example.demo.src.survey.model.GetSurveyRes;
 import com.example.demo.src.user.model.*;
 import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.example.demo.config.BaseResponseStatus.*;
 import static com.example.demo.utils.ValidationRegex.isRegexEmail;
@@ -96,6 +100,23 @@ public class UserController {
         }
 
     }
+
+    /*
+    유저 프로필 조회
+    */
+    @ResponseBody
+    @GetMapping("/{userIdx}/profile") //(Get) 127.0.0.1:9000/users/{userIdx}/profile
+    public BaseResponse<GetUserProfileRes> getUserProfile(@PathVariable ("userIdx") int userIdx) {
+        try {
+            GetUserProfileRes getUserProfileRes = userProvider.getUserProfile(userIdx);
+            return new BaseResponse<>(getUserProfileRes);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+
+
 }
 
 
