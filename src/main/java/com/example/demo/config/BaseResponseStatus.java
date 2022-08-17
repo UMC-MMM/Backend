@@ -76,6 +76,7 @@ public enum BaseResponseStatus {
 
     //[PATCH] /users/{userIdx}
     MODIFY_FAIL_USERNAME(false,4014,"유저네임 수정 실패"),
+    MODIFY_FAIL_USERPROFILE(false, 4100, "유저 프로필 수정에 실패하였습니다."),
 
     //Post /posts
     MODIFY_FAIL_POST(false,4015,"설문조사 내용 수정에 실패하였습니다."),

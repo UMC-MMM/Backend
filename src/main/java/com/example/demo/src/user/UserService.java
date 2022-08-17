@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import static com.example.demo.config.BaseResponseStatus.*;
 
+
 @Service
 public class UserService {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -73,4 +74,25 @@ public class UserService {
             throw new BaseException(FAILED_TO_LOGIN);
         }
     }
+
+    public void modifyUserProfile(int userIdx, PatchUserProfileReq patchUserProfileReq) throws BaseException{
+        if(userProvider.checkUserExist(userIdx)==0){
+            throw new BaseException(USERS_EMPTY_USER_ID);
+        }
+        try{
+            int result = userDao.updateUserProfile(userIdx, patchUserProfileReq.getProfileImgUrl(),
+                    patchUserProfileReq.getUserName(), patchUserProfileReq.getUserGender(),
+                    patchUserProfileReq.getUserAge(),
+                    patchUserProfileReq.getUserEmail());
+            if(result == 0){
+                throw new BaseException(MODIFY_FAIL_USERPROFILE);
+            }
+        }
+        catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+
+    }
+
+
 }
