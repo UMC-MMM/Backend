@@ -54,6 +54,12 @@ public class UserController {
             return new BaseResponse<>(POST_USERS_EMPTY_PASSWORD);
             //비밀번호 빈칸
         }
+
+        if (postUserReq.getUserName() == null || postUserReq.getUserName().equals("")) {
+            return new BaseResponse<>(USERS_EMPTY_USER_NAME);
+            //유저 이름(닉네임) 빈칸
+        }
+
         if (!isRegexEmail(postUserReq.getUserEmail())) {
             return new BaseResponse<>(POST_USERS_INVALID_EMAIL);
             //이메일 정규표현 검사
@@ -107,6 +113,7 @@ public class UserController {
     @ResponseBody
     @GetMapping("/{userIdx}/profile") //(Get) 127.0.0.1:9000/users/{userIdx}/profile
     public BaseResponse<GetUserProfileRes> getUserProfile(@PathVariable ("userIdx") int userIdx) {
+
         try {
             GetUserProfileRes getUserProfileRes = userProvider.getUserProfile(userIdx);
             return new BaseResponse<>(getUserProfileRes);
@@ -129,10 +136,16 @@ public class UserController {
                 return new BaseResponse<>(INVALID_USER_JWT);
             }
 
+            if (patchUserProfileReq.getUserName() == null || patchUserProfileReq.getUserName().equals("")) {
+                return new BaseResponse<>(USERS_EMPTY_USER_NAME);
+                //유저 이름(닉네임) 빈칸
+            }
+
             if (patchUserProfileReq.getUserEmail() == null || patchUserProfileReq.getUserEmail().equals("")) {
                 return new BaseResponse<>(POST_USERS_EMPTY_EMAIL);
                 //이메일 빈칸
             }
+
             if (!isRegexEmail(patchUserProfileReq.getUserEmail())) {
                 return new BaseResponse<>(POST_USERS_INVALID_EMAIL);
                 //이메일 정규표현 검사
