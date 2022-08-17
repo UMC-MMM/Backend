@@ -113,17 +113,26 @@ public class UserDao {
     유저 프로필 조회
      */
     public GetUserProfileRes getUserProfile(int userIdx){
-        String getUserProfileQuery = "select userIdx,profileImgUrl, userId, userGender, userAge, userEmail from User where userIdx=?";
+        String getUserProfileQuery = "SELECT userIdx,profileImgUrl, userName, userGender, userAge, userEmail FROM User WHERE userIdx=?";
         int getUserProfileParams = userIdx;
         return this.jdbcTemplate.queryForObject(getUserProfileQuery,
                 (rs, rowNum) -> new GetUserProfileRes(
                         rs.getInt("userIdx"),
                         rs.getString("profileImgUrl"),
-                        rs.getString("userId"),
+                        rs.getString("userName"),
                         rs.getString("userGender"),
                         rs.getInt("userAge"),
                         rs.getString("userEmail")),
                 getUserProfileParams);
+    }
+
+    public int updateUserProfile(int userIdx, String profileImgUrl, String userName,
+                                 String userGender, int userAge, String userEmail){
+        String updateUserProfileQuery = "UPDATE User SET profileImgUrl=?, userName=?, userGender=?, userAge=?, userEmail=? WHERE userIdx=?";
+        Object [] updateUserProfileParams = new Object[] {
+                profileImgUrl, userName, userGender, userAge, userEmail, userIdx};
+        return this.jdbcTemplate.update(updateUserProfileQuery, updateUserProfileParams);
+
     }
 
 

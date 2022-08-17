@@ -13,7 +13,7 @@ import lombok.Setter;
 public class GetUserProfileRes {
     private int userIdx;
     private String profileImgUrl;
-    private String userId;
+    private String userName;
     private String userGender;
     private int userAge;
     private String userEmail;
