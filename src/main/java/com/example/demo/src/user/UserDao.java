@@ -57,6 +57,16 @@ public class UserDao {
 
     }
 
+    public int checkUserName(String name){
+        String checkNameQuery = "SELECT exists(SELECT userName FROM User WHERE userName = ?)";
+        String checkNameParams = name;
+        return this.jdbcTemplate.queryForObject(checkNameQuery,
+                int.class,
+                checkNameParams);
+
+    }
+
+
     public UserInfo login(PostLoginReq postLoginReq){
         String getPwdQuery = "select userIdx, userId, userName, userEmail, userPassword from User where userId = ?";
         String getPwdParams = postLoginReq.getId();

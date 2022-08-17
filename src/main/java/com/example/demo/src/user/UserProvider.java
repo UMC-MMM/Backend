@@ -26,14 +26,6 @@ public class UserProvider {
         this.jwtService = jwtService;
     }
 
-    public int checkUserEmail(String email) throws BaseException {
-        try{
-            return userDao.checkUserEmail(email);
-        } catch (Exception exception){
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
-
     public int checkUserId(String id) throws BaseException {
         try{
             return userDao.checkUserId(id);
@@ -48,6 +40,23 @@ public class UserProvider {
             return userDao.checkUserExist(userIdx);
         } catch (Exception exception){
             throw new BaseException(USERS_EMPTY_USER_ID);
+        }
+    }
+
+
+    public int checkUserEmail(String email) throws BaseException {
+        try{
+            return userDao.checkUserEmail(email);
+        } catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public int checkUserName(String name) throws BaseException {
+        try{
+            return userDao.checkUserName(name);
+        } catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
         }
     }
 
