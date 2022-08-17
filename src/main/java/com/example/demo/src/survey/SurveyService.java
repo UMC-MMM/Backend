@@ -47,14 +47,13 @@ public class SurveyService {
 
             for (PostSurveyQuestionReq question : postSurveyReq.getSurveyQuestion()){
                 int questionIdx = surveyDao.insertSurveyQuestion(surveyIdx, question);
-                for(PostSurveyQuestionOptionReq option : question.getPostQuestionOption()){
+                for(PostSurveyQuestionOptionReq option : question.getQuestionOption()){
                     surveyDao.insertSurveyQuestionOption(questionIdx, option);
                 }
             }
             return new PostSurveyRes(surveyIdx);
         }
         catch (Exception exception) {
-            System.out.println(exception);
             throw new BaseException(DATABASE_ERROR);
         }
 

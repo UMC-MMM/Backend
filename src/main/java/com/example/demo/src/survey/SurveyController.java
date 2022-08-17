@@ -41,7 +41,7 @@ public class SurveyController {
 설문조사 목록
  */
     @ResponseBody
-    @GetMapping("")
+    @GetMapping("") //(Get) 127.0.0.1:9000/survey
     public BaseResponse<List<GetSurveyRes>> getSurveys() { //여러 게시글 볼 수 있으므로 list, 따로 받을 값 없으므로 파라미터 비움
         try {
             List<GetSurveyRes> getSurveyRes = surveyProvider.retrieveSurvey();
@@ -56,16 +56,13 @@ public class SurveyController {
  */
     @ResponseBody
 
-    @PostMapping("")
-
+    @PostMapping("") //(Post) 127.0.0.1:9000/survey
     public BaseResponse<PostSurveyRes> createSurvey(@RequestBody PostSurveyReq postSurveyReq) {
         try{
-
             int userIdxByJwt = jwtService.getUserIdx();
             if(postSurveyReq.getUserIdx()!=userIdxByJwt){
                 return new BaseResponse<>(BaseResponseStatus.INVALID_USER_JWT);
             }
-
 
 /*
             if(postSurveyQuestionReq.getQuestionType().length()<1)
@@ -117,10 +114,9 @@ public class SurveyController {
 설문조사 삭제
  */
     @ResponseBody
-    @PatchMapping("/{surveyIdx}/status")
+    @PatchMapping("/{surveyIdx}/status") //(Patch) 127.0.0.1:9000/survey/{surveyIdx}/status
     public BaseResponse<String> deleteSurvey(@PathVariable("surveyIdx") int surveyIdx) {
         try{
-
 
             surveyService.deleteSurvey(surveyIdx);
             String result = "게시글 삭제에 성공했습니다.";

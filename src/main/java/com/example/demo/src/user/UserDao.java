@@ -1,9 +1,6 @@
 package com.example.demo.src.user;
 
-import com.example.demo.src.user.model.GetPointRes;
-import com.example.demo.src.user.model.PostLoginReq;
-import com.example.demo.src.user.model.PostUserReq;
-import com.example.demo.src.user.model.UserInfo;
+import com.example.demo.src.user.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -111,4 +108,23 @@ public class UserDao {
         int getPointMinusSumParam = userIdx;
         return this.jdbcTemplate.queryForObject(getPointMinusSumQuery,int.class,getPointMinusSumParam);
     }
+
+    /*
+    유저 프로필 조회
+     */
+    public GetUserProfileRes getUserProfile(int userIdx){
+        String getUserProfileQuery = "select userIdx,profileImgUrl, userId, userGender, userAge, userEmail from User where userIdx=?";
+        int getUserProfileParams = userIdx;
+        return this.jdbcTemplate.queryForObject(getUserProfileQuery,
+                (rs, rowNum) -> new GetUserProfileRes(
+                        rs.getInt("userIdx"),
+                        rs.getString("profileImgUrl"),
+                        rs.getString("userId"),
+                        rs.getString("userGender"),
+                        rs.getInt("userAge"),
+                        rs.getString("userEmail")),
+                getUserProfileParams);
+    }
+
+
 }
