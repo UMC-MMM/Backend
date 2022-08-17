@@ -52,6 +52,7 @@ public class UserProvider {
         }
     }
 
+
     public int checkUserName(String name) throws BaseException {
         try{
             return userDao.checkUserName(name);
@@ -59,6 +60,8 @@ public class UserProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+
+
 
     public GetUserPointRes getUserPoint(int userIdx) throws BaseException{
 

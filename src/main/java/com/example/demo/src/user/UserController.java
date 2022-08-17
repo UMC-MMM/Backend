@@ -152,8 +152,10 @@ public class UserController {
             }
             userService.modifyUserProfile(userIdx, patchUserProfileReq);
             String result = "유저 프로필 변경을 성공하였습니다.";
+
             return new BaseResponse<>(result);
         } catch(BaseException exception){
+            System.out.println(exception);
             return new BaseResponse<>((exception.getStatus()));
         }
     }
