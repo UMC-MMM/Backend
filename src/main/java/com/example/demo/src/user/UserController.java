@@ -4,7 +4,9 @@ import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 
 import com.example.demo.src.survey.SurveyProvider;
+import com.example.demo.src.survey.model.GetSurvey;
 import com.example.demo.src.survey.model.GetSurveyRes;
+import com.example.demo.src.survey.model.GetSurveyResultRes;
 import com.example.demo.src.user.model.*;
 import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
@@ -87,7 +89,7 @@ public class UserController {
         }
     }
     /**
-     * 내 설문조사 api
+     * 내 설문조사 리스트 조회 api
      */
     @ResponseBody
     @GetMapping("/mysurveys")
@@ -100,6 +102,25 @@ public class UserController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+    /*
+    설문조사 결과 조회
+     */
+    @ResponseBody
+    @GetMapping("/mysurveys/{surveyIdx}")
+    public BaseResponse<GetSurveyResultRes> getMySurveyResult(@PathVariable int surveyIdx) {
+        try {
+            int userIdxByJwt = jwtService.getUserIdx();
+            if(!surveyProvider.isMySurvey(userIdxByJwt,surveyIdx)){
+                return new BaseResponse<>(NOT_USERS_SURVEY);
+            }
+            GetSurveyResultRes getSurveyResultRes = surveyProvider.getSurveyResult(surveyIdx);
+            return new BaseResponse<>(getSurveyResultRes);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+
     /**
      * 포인트 조회 api
      */
