@@ -100,8 +100,6 @@ public class SurveyDao {
 
         this.jdbcTemplate.update(insertSurveyQuestionOptionQuery, insertSurveyQuestionOptionParams);
 
-        System.out.println(postSurveyQuestionOptionReq.getOptionContent());
-
         String lastInsertIdxQuery = "select last_insert_id()";
         return this.jdbcTemplate.queryForObject(lastInsertIdxQuery,int.class);
 

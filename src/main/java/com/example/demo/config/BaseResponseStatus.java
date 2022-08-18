@@ -25,6 +25,10 @@ public enum BaseResponseStatus {
     // users
     USERS_EMPTY_USER_ID(false, 2010, "유저 아이디 값을 확인해주세요."),
     USERS_EXISTS_USER_ID(false,2011,"중복된 아이디입니다."),
+
+    USERS_EXISTS_USER_NAME(false,2012,"중복된 닉네임입니다."),
+    USERS_EMPTY_USER_NAME(false,2013,"유저 닉네임을 입력해주세요."),
+
     // [POST] /users
     POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),
     POST_USERS_INVALID_EMAIL(false, 2016, "이메일 형식을 확인해주세요."),
@@ -76,6 +80,7 @@ public enum BaseResponseStatus {
 
     //[PATCH] /users/{userIdx}
     MODIFY_FAIL_USERNAME(false,4014,"유저네임 수정 실패"),
+    MODIFY_FAIL_USERPROFILE(false, 4100, "유저 프로필 수정에 실패하였습니다."),
 
     //Post /posts
     MODIFY_FAIL_POST(false,4015,"설문조사 내용 수정에 실패하였습니다."),

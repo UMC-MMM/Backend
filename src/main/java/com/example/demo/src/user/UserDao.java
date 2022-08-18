@@ -1,9 +1,6 @@
 package com.example.demo.src.user;
 
-import com.example.demo.src.user.model.GetPointRes;
-import com.example.demo.src.user.model.PostLoginReq;
-import com.example.demo.src.user.model.PostUserReq;
-import com.example.demo.src.user.model.UserInfo;
+import com.example.demo.src.user.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -60,6 +57,16 @@ public class UserDao {
 
     }
 
+    public int checkUserName(String name){
+        String checkNameQuery = "SELECT exists(SELECT userName FROM User WHERE userName = ?)";
+        String checkNameParams = name;
+        return this.jdbcTemplate.queryForObject(checkNameQuery,
+                int.class,
+                checkNameParams);
+
+    }
+
+
     public UserInfo login(PostLoginReq postLoginReq){
         String getPwdQuery = "select userIdx, userId, userName, userEmail, userPassword from User where userId = ?";
         String getPwdParams = postLoginReq.getId();
@@ -111,4 +118,32 @@ public class UserDao {
         int getPointMinusSumParam = userIdx;
         return this.jdbcTemplate.queryForObject(getPointMinusSumQuery,int.class,getPointMinusSumParam);
     }
+
+    /*
+    유저 프로필 조회
+     */
+    public GetUserProfileRes getUserProfile(int userIdx){
+        String getUserProfileQuery = "SELECT userIdx,profileImgUrl, userName, userGender, userAge, userEmail FROM User WHERE userIdx=?";
+        int getUserProfileParams = userIdx;
+        return this.jdbcTemplate.queryForObject(getUserProfileQuery,
+                (rs, rowNum) -> new GetUserProfileRes(
+                        rs.getInt("userIdx"),
+                        rs.getString("profileImgUrl"),
+                        rs.getString("userName"),
+                        rs.getString("userGender"),
+                        rs.getInt("userAge"),
+                        rs.getString("userEmail")),
+                getUserProfileParams);
+    }
+
+    public int updateUserProfile(int userIdx, String profileImgUrl, String userName,
+                                 String userGender, int userAge, String userEmail){
+        String updateUserProfileQuery = "UPDATE User SET profileImgUrl=?, userName=?, userGender=?, userAge=?, userEmail=? WHERE userIdx=?";
+        Object [] updateUserProfileParams = new Object[] {
+                profileImgUrl, userName, userGender, userAge, userEmail, userIdx};
+        return this.jdbcTemplate.update(updateUserProfileQuery, updateUserProfileParams);
+
+    }
+
+
 }
