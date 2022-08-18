@@ -113,9 +113,9 @@ public class SurveyController {
         }
     }
 
-/*
-설문조사 삭제
- */
+    /*
+    설문조사 삭제
+    */
     @ResponseBody
     @PatchMapping("/{surveyIdx}/status")
     public BaseResponse<String> deleteSurvey(@PathVariable("surveyIdx") int surveyIdx) {
@@ -129,6 +129,9 @@ public class SurveyController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+    /*
+    설문조사 조회
+     */
     @ResponseBody
     @GetMapping("/{surveyIdx}")//(GET) 127.0.0.1:9000/survey/{surveyIdx}
     public BaseResponse<GetSurvey> getSurvey(@PathVariable("surveyIdx") int surveyIdx) {
@@ -139,6 +142,9 @@ public class SurveyController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+    /*
+    설문조사 답변 등록
+     */
     @ResponseBody
     @PostMapping("/{surveyIdx}") // (Post) 127.0.0.1:9000/survey/{surveyIdx}
     public BaseResponse<String> createSurveyAnswer(@PathVariable("surveyIdx") int surveyIdx, @RequestBody PostSurveyAnswerReq postSurveyAnswerReq) {
@@ -154,5 +160,6 @@ public class SurveyController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
 
 }

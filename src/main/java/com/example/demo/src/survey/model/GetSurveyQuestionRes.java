@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetSurveyQuestionRes {
+    private int questionIdx;
     private String questionType;
     private String questionContent;
     private List<GetSurveyQuestionOptionRes> Options;

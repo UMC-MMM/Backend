@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.example.demo.config.BaseResponseStatus.DATABASE_ERROR;
 
@@ -28,7 +29,7 @@ public class HomeProvider {
     public GetHomeRes getHome() throws BaseException {
         try {
             List<GetSurveyRes> getSurvey = surveyDao.selectSurvey();
-            List<String> getCategoryList = surveyDao.selectSurveyCategoryList();
+            Map<Integer,String> getCategoryList = surveyDao.selectSurveyCategoryList();
             GetHomeRes getHomeRes = new GetHomeRes(getSurvey, getCategoryList);
             return getHomeRes;
 
