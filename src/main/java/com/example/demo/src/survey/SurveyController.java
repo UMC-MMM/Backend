@@ -10,12 +10,8 @@ import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,6 +27,7 @@ public class SurveyController {
 
     @Autowired
     private final JwtService jwtService;
+
 
     public SurveyController(SurveyProvider surveyProvider, SurveyService surveyService, JwtService jwtService) {
         this.surveyProvider = surveyProvider;
@@ -133,20 +130,12 @@ public class SurveyController {
      */
     @ResponseBody
     @GetMapping("/{surveyIdx}")//(GET) 127.0.0.1:9000/survey/{surveyIdx}
-    public ResponseEntity<?> getSurvey(@PathVariable("surveyIdx") int surveyIdx) {
+    public BaseResponse<GetSurvey> getSurvey(@PathVariable("surveyIdx") int surveyIdx) {
         try {
             GetSurvey getSurvey = surveyProvider.getSurvey(surveyIdx);
-            BaseResponse<GetSurvey> res = new BaseResponse<>(getSurvey);
-            int userIdxByJwt = jwtService.getUserIdx();
-            if(getSurvey.getGetSurveyRes().getUserIdx()==userIdxByJwt){
-                HttpHeaders headers = new HttpHeaders();
-                headers.setLocation(URI.create("/users/mysurveys/"));// 설문조사 결과 조회 페이지 나오면 수정
-                return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
-            }
-            return new ResponseEntity(res,HttpStatus.OK);
+            return new BaseResponse<>(getSurvey);
         } catch (BaseException exception) {
-            BaseResponse<BaseResponseStatus> res = new BaseResponse<>((exception.getStatus()));
-            return new ResponseEntity(res,HttpStatus.OK);
+            return new BaseResponse<>((exception.getStatus()));
         }
     }
     /*
@@ -167,5 +156,6 @@ public class SurveyController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
 
 }

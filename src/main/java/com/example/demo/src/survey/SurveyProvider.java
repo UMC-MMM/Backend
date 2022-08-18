@@ -1,7 +1,10 @@
 package com.example.demo.src.survey;
 
 import com.example.demo.config.BaseException;
-import com.example.demo.src.survey.model.*;
+import com.example.demo.src.survey.model.GetSurvey;
+import com.example.demo.src.survey.model.GetSurveyQuestionRes;
+import com.example.demo.src.survey.model.GetSurveyRes;
+import com.example.demo.src.user.UserDao;
 import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,9 +50,7 @@ public class SurveyProvider {
         }
     }
 
-    /*
-    설문조사 존재 여부 존재하면 1 없으면 0
-     */
+
     public int checkSurveyExist(int surveyIdx) throws BaseException{
         try{
             return surveyDao.checkSurveyExist(surveyIdx);
@@ -58,25 +59,11 @@ public class SurveyProvider {
         }
     }
 
-    /*
-    내 설문조사인지
-    */
-    public boolean isMySurvey(int userIdxByJwt, int surveyIdx) throws BaseException{
+    public GetSurvey getSurvey(int surveyIdx)throws BaseException{
         try{
-            return surveyDao.checkMySurvey(userIdxByJwt,surveyIdx);
-        } catch (Exception exception){
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
-
-    /*
-    설문조사Idx로 설문조사 조회
-     */
-    public GetSurvey getSurvey(int surveyIdx) throws BaseException{
-        if(checkSurveyExist(surveyIdx)==0){
-            throw new BaseException(SURVEY_NOT_EXIST);
-        }
-        try{
+            if(checkSurveyExist(surveyIdx)==0){
+                throw new BaseException(SURVEY_NOT_EXIST);
+            }
             GetSurveyRes getSurveyRes =  surveyDao.selectSurveyOne(surveyIdx);
             List<GetSurveyQuestionRes> getSurveyQuestionRes = surveyDao.selectSurveyQuestions(surveyIdx);
             GetSurvey getSurvey = new GetSurvey(getSurveyRes, getSurveyQuestionRes);
@@ -85,28 +72,15 @@ public class SurveyProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
-    /*
-    userIdx로 내설문조사 조회
-     */
     public  List<GetSurveyRes> getMySurvey(int userIdx) throws BaseException{
         try{
             if(checkUserExist(userIdx)==0){
                 throw new BaseException(USERS_EMPTY_USER_ID);
             }
+            System.out.println("ok!!!!!!!!!");
             List<GetSurveyRes> getMySurvey = surveyDao.selectSurveyByUserIdx(userIdx);
+            System.out.println("ok2!!!!!!!!!");
             return  getMySurvey;
-        }catch (Exception exception){
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
-    /*
-    내설문조사 결과 조회
-     */
-    public GetSurveyResultRes getSurveyResult(int surveyIdx) throws BaseException{
-        try{
-            GetSurveyRes getSurveyRes = surveyDao.selectSurveyOne(surveyIdx);
-            List<QuestionResult> questionResultList = surveyDao.selectQuestionResult(surveyIdx);
-            return new GetSurveyResultRes(getSurveyRes,questionResultList);
         }catch (Exception exception){
             throw new BaseException(DATABASE_ERROR);
         }

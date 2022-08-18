@@ -53,7 +53,6 @@ public enum BaseResponseStatus {
     POST_SURVEY_EMPTY_CONTENT(false,2040,"문항의 내용을 입력하세요."),
     POST_SURVEY_EMPTY_OPTION_CONTENT(false,2041,"선택 옵션 내용을 입력하세요."),
     POST_SURVEY_EMPTY_QUESTIONTYPE(false,2042,"문항 타입을 선택하세요."),
-    NOT_USERS_SURVEY(false, 2043, "설문조사 게시자만 조회할수 있습니다."),
 
 
 
