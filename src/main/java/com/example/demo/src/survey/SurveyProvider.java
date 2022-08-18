@@ -72,5 +72,18 @@ public class SurveyProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+    public  List<GetSurveyRes> getMySurvey(int userIdx) throws BaseException{
+        try{
+            if(checkUserExist(userIdx)==0){
+                throw new BaseException(USERS_EMPTY_USER_ID);
+            }
+            System.out.println("ok!!!!!!!!!");
+            List<GetSurveyRes> getMySurvey = surveyDao.selectSurveyByUserIdx(userIdx);
+            System.out.println("ok2!!!!!!!!!");
+            return  getMySurvey;
+        }catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 
 }

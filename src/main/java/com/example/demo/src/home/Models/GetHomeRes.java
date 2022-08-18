@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
 @AllArgsConstructor
 public class GetHomeRes {
     private List<GetSurveyRes> bestSurvey;
-    private List<String> surveyCategoryList;
+    private Map<Integer,String> surveyCategoryList;
 }
 
