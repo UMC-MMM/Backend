@@ -140,7 +140,7 @@ public class SurveyController {
             int userIdxByJwt = jwtService.getUserIdx();
             if(getSurvey.getGetSurveyRes().getUserIdx()==userIdxByJwt){
                 HttpHeaders headers = new HttpHeaders();
-                headers.setLocation(URI.create("/users/mysurveys/"));// 설문조사 결과 조회 페이지 나오면 수정
+                headers.setLocation(URI.create("/users/mysurveys/"+surveyIdx));// 설문조사 결과 조회 페이지 나오면 수정
                 return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
             }
             return new ResponseEntity(res,HttpStatus.OK);
