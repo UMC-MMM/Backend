@@ -58,11 +58,11 @@ public class UserDao {
     }
 
     public int checkUserName(String name){
-        String checkNameQuery = "SELECT exists(SELECT userName FROM User WHERE userName = ?)";
-        String checkNameParams = name;
-        return this.jdbcTemplate.queryForObject(checkNameQuery,
+        String checkUserNameQuery = "SELECT exists(SELECT userName FROM User WHERE userName = ?)";
+        String checkUserNameParams = name;
+        return this.jdbcTemplate.queryForObject(checkUserNameQuery,
                 int.class,
-                checkNameParams);
+                checkUserNameParams);
 
     }
 
