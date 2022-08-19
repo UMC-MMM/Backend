@@ -96,7 +96,9 @@ public class UserService {
 
 
             // 이름(닉네임 중복 확인)
-
+            if(userProvider.checkUserName(patchUserProfileReq.getUserName()) ==1){
+                throw new BaseException(USERS_EXISTS_USER_NAME);
+            }
 
             if(result == 0){
                 throw new BaseException(MODIFY_FAIL_USERPROFILE);

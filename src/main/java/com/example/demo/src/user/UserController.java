@@ -90,23 +90,6 @@ public class UserController {
         }
     }
 
-
-    /**
-     * 포인트 조회 api
-     */
-    @ResponseBody
-    @GetMapping("/{userIdx}/point")
-    public BaseResponse<GetUserPointRes> getUserPoint(@PathVariable ("userIdx") int userIdx)  {
-
-        try {
-            GetUserPointRes getUserPointRes = userProvider.getUserPoint(userIdx);
-            return new BaseResponse<>(getUserPointRes);
-        } catch (BaseException exception) {
-            return new BaseResponse<>((exception.getStatus()));
-        }
-
-    }
-
     /*
     유저 프로필 조회
     */
@@ -129,9 +112,7 @@ public class UserController {
     @PatchMapping("/{userIdx}/profile-modification") // (Patch) 127.0.0.1:9000/users/{userIdx}/profile-modification
     public BaseResponse<String> modifyUserProfile(@PathVariable("userIdx") int userIdx, @RequestBody PatchUserProfileReq patchUserProfileReq) {
         try{
-            //jwt에서 idx 추출
             int userIdxByJwt = jwtService.getUserIdx();
-            //userIdx와 접근한 유저가 같은지 확인
             if(userIdx != userIdxByJwt){
                 return new BaseResponse<>(INVALID_USER_JWT);
             }
@@ -158,6 +139,24 @@ public class UserController {
             System.out.println(exception);
             return new BaseResponse<>((exception.getStatus()));
         }
+    }
+
+
+
+    /**
+     * 포인트 조회 api
+     */
+    @ResponseBody
+    @GetMapping("/{userIdx}/point")
+    public BaseResponse<GetUserPointRes> getUserPoint(@PathVariable ("userIdx") int userIdx)  {
+
+        try {
+            GetUserPointRes getUserPointRes = userProvider.getUserPoint(userIdx);
+            return new BaseResponse<>(getUserPointRes);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+
     }
 
 
