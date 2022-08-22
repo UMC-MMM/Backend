@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="656727c4-73f9-468e-af0a-199517bdd94c" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/HomeProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/HomeProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/Models/GetHomeRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/Models/GetHomeRes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionAnswerRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionAnswerRes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionRes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/user/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/user/UserDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
