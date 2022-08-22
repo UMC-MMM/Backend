@@ -147,9 +147,9 @@ public class UserDao {
 
     public int updateUserProfile(int userIdx, String profileImgUrl, String userName,
                                  String userGender, int userAge, String userEmail){
-        String updateUserProfileQuery = "UPDATE User SET profileImgUrl=?, userName=?, userGender=?, userAge=?, userEmail=? WHERE userIdx=?";
+        String updateUserProfileQuery = "UPDATE User SET userName=?, userGender=?, userAge=?, userEmail=? WHERE userIdx=?";
         Object [] updateUserProfileParams = new Object[] {
-                profileImgUrl, userName, userGender, userAge, userEmail, userIdx};
+                userName, userGender, userAge, userEmail, userIdx};
         return this.jdbcTemplate.update(updateUserProfileQuery, updateUserProfileParams);
 
     }
