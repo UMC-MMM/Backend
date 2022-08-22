@@ -57,6 +57,17 @@ public class SurveyProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+    /*
+    유효한 설문조사인지(마감안됐는지)
+    유효 1 마감 0
+     */
+    public int checkSurveyIsValid(int surveyIdx) throws BaseException{
+         try{
+             return surveyDao.checkSurveyIsValid(surveyIdx);
+         }catch(Exception exception) {
+             throw new BaseException(DATABASE_ERROR);
+         }
+    }
 
     /*
     내 설문조사인지
@@ -75,6 +86,9 @@ public class SurveyProvider {
     public GetSurvey getSurvey(int surveyIdx) throws BaseException{
         if(checkSurveyExist(surveyIdx)==0){
             throw new BaseException(SURVEY_NOT_EXIST);
+        }
+        if(checkSurveyIsValid(surveyIdx)==0){
+            throw new BaseException(SURVEY_NOT_VALID);
         }
         try{
             GetSurveyRes getSurveyRes =  surveyDao.selectSurveyOne(surveyIdx);

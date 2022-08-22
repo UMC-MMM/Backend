@@ -71,6 +71,7 @@ public enum BaseResponseStatus {
 
     //survey
     SURVEY_NOT_EXIST(false,3015,"설문조사가 존재하지 않습니다."),
+    SURVEY_NOT_VALID(false, 3016, "마감됐거나 삭제된 설문조사입니다."),
     CHECK_ERROR(false,7777,"test중입니다"),
 
     /**
