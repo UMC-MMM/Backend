@@ -2,6 +2,7 @@ package com.example.demo.src.user;
 
 import com.example.demo.src.user.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -107,16 +108,24 @@ public class UserDao {
                         rs.getString("pointContent")
                 ),selectUserPointMinusParam);
     }
-    public int getPointPlusSum(int userIdx){
-        String getPointPlusSumQuery = "select SUM(pointValue) from PointPlus where userIdx=?";
-        int getPointPlusSumParam = userIdx;
-        return this.jdbcTemplate.queryForObject(getPointPlusSumQuery,int.class,getPointPlusSumParam);
+    public int getPointPlusSum(int userIdx) {
+        try {
+            String getPointPlusSumQuery = "select SUM(pointValue) from PointPlus where userIdx=?";
+            int getPointPlusSumParam = userIdx;
+            return this.jdbcTemplate.queryForObject(getPointPlusSumQuery, int.class, getPointPlusSumParam);
+        }catch (NullPointerException e) { // 쿼리문에 해당하는 결과가 없을 때
+            return 0;
+        }
     }
 
     public int getPointMinusSum(int userIdx){
-        String getPointMinusSumQuery = "select SUM(pointValue) from PointMinus where userIdx=?";
-        int getPointMinusSumParam = userIdx;
-        return this.jdbcTemplate.queryForObject(getPointMinusSumQuery,int.class,getPointMinusSumParam);
+        try {
+            String getPointMinusSumQuery = "select SUM(pointValue) from PointMinus where userIdx=?";
+            int getPointMinusSumParam = userIdx;
+            return this.jdbcTemplate.queryForObject(getPointMinusSumQuery, int.class, getPointMinusSumParam);
+        }catch (NullPointerException e) { // 쿼리문에 해당하는 결과가 없을 때
+            return 0;
+        }
     }
 
     /*

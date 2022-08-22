@@ -62,9 +62,6 @@ public class UserProvider {
 
     public GetUserPointRes getUserPoint(int userIdx) throws BaseException{
 
-        if(checkUserExist(userIdx)==0){
-            throw new BaseException(USERS_EMPTY_USER_ID);
-        }
         try{
             List<GetPointRes> plusPointHistory = userDao.selectUserPointPlus(userIdx);
             List<GetPointRes> minusPointHistory = userDao.selectUserPointMinus(userIdx);
