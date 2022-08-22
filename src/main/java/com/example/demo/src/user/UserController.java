@@ -179,11 +179,11 @@ public class UserController {
      * 포인트 조회 api
      */
     @ResponseBody
-    @GetMapping("/{userIdx}/point")
-    public BaseResponse<GetUserPointRes> getUserPoint(@PathVariable ("userIdx") int userIdx)  {
-
+    @GetMapping("/point")
+    public BaseResponse<GetUserPointRes> getUserPoint()  {
         try {
-            GetUserPointRes getUserPointRes = userProvider.getUserPoint(userIdx);
+            int userIdxByJwt = jwtService.getUserIdx();
+            GetUserPointRes getUserPointRes = userProvider.getUserPoint(userIdxByJwt);
             return new BaseResponse<>(getUserPointRes);
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
