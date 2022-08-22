@@ -4,7 +4,6 @@ import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 
 import com.example.demo.src.survey.SurveyProvider;
-import com.example.demo.src.survey.model.GetSurvey;
 import com.example.demo.src.survey.model.GetSurveyRes;
 import com.example.demo.src.survey.model.GetSurveyResultRes;
 import com.example.demo.src.user.model.*;

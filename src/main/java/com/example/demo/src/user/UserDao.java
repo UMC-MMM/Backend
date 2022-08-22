@@ -145,7 +145,7 @@ public class UserDao {
                 getUserProfileParams);
     }
 
-    public int updateUserProfile(int userIdx, String profileImgUrl, String userName,
+    public int updateUserProfile(int userIdx, String userName,
                                  String userGender, int userAge, String userEmail){
         String updateUserProfileQuery = "UPDATE User SET userName=?, userGender=?, userAge=?, userEmail=? WHERE userIdx=?";
         Object [] updateUserProfileParams = new Object[] {

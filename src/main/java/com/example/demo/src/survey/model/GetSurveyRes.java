@@ -24,4 +24,5 @@ public class GetSurveyRes {
     private int surveyPointValue;
     private int totalParticipant;
     private int userIdx;
+    private String userName;
 }

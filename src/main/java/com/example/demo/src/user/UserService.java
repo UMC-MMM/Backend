@@ -91,7 +91,7 @@ public class UserService {
         }
 
         try{
-            int result = userDao.updateUserProfile(userIdx, patchUserProfileReq.getProfileImgUrl(),
+            int result = userDao.updateUserProfile(userIdx,
                     patchUserProfileReq.getUserName(), patchUserProfileReq.getUserGender(),
                     patchUserProfileReq.getUserAge(),
                     patchUserProfileReq.getUserEmail());
