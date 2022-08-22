@@ -58,16 +58,31 @@ public class SurveyDao {
      */
     public int insertSurvey(int userIdx, String surveyIntroduction, String surveyTitle,
                             int surveyCategoryIdx, String deadlineAt, String preferGender,
-                            int preferAge, int surveyTime, String hashtag, int surveyPointValue, int couponIdx) {
+                            int preferAge, int surveyTime,
+                            String hashtag,
+                            int surveyPointValue, int couponIdx) {
         String insertSurveyQuery = "INSERT INTO Survey(userIdx, surveyIntroduction, surveyTitle, surveyCategoryIdx,\n" +
-                "        deadlineAt, preferGender, preferAge, surveyTime, hashtag, surveyPointValue, couponIdx)\n" +
+                "        deadlineAt, preferGender, preferAge, surveyTime, hashtag,\n" +
+                "surveyPointValue, couponIdx)\n" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         Object[] insertSurveyParams = new Object[]{userIdx, surveyIntroduction, surveyTitle, surveyCategoryIdx,
-                deadlineAt, preferGender, preferAge, surveyTime, hashtag, surveyPointValue, couponIdx};
+                deadlineAt, preferGender, preferAge, surveyTime,
+                hashtag,
+                surveyPointValue, couponIdx};
         this.jdbcTemplate.update(insertSurveyQuery, insertSurveyParams);
 
         String lastInsertIdxQuery = "select last_insert_id()";
         return this.jdbcTemplate.queryForObject(lastInsertIdxQuery, int.class);
+
+    }
+
+    /*
+    설문조사 참여자 수 증가
+     */
+    public int countParticipant(int surveyIdx) {
+        String countParticipantQuery = "UPDATE Survey SET totalParticipant=totalParticipant + 1 WHERE surveyIdx=?";
+        Object[] countParticipantParams = new Object[]{surveyIdx};
+        return this.jdbcTemplate.update(countParticipantQuery, countParticipantParams);
 
     }
 

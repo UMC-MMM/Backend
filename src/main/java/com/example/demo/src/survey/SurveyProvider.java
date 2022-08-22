@@ -33,7 +33,7 @@ public class SurveyProvider {
             return getSurvey;
         }
         catch (Exception exception) {
-            //System.out.println(exception);
+            System.out.println(exception);
             throw new BaseException(DATABASE_ERROR);
         }
 

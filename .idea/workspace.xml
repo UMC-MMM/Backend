@@ -8,7 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/model/GetSurveyRes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/model/GetSurveyRes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,8 +55,10 @@
   "keyToString": {
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelOrder2": "2",
     "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75"
+    "RequestMappingsPanelWidth1": "75",
+    "RequestMappingsPanelWidth2": "75"
   }
 }]]></component>
   <component name="RecentsManager">
