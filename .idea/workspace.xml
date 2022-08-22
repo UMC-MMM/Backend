@@ -10,9 +10,6 @@
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/Models/GetHomeRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/Models/GetHomeRes.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionAnswerRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionAnswerRes.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionRes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/user/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/user/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/user/UserProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/user/UserProvider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

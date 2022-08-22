@@ -108,7 +108,7 @@ public class UserDao {
                         rs.getString("pointContent")
                 ),selectUserPointMinusParam);
     }
-    public int getPointPlusSum(int userIdx) throws IncorrectResultSizeDataAccessException{
+    public int getPointPlusSum(int userIdx) {
         try {
             String getPointPlusSumQuery = "select SUM(pointValue) from PointPlus where userIdx=?";
             int getPointPlusSumParam = userIdx;
