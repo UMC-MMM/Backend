@@ -88,12 +88,13 @@ public class SurveyProvider {
             throw new BaseException(SURVEY_NOT_EXIST);
         }
         if(checkSurveyIsValid(surveyIdx)==0){
-            throw new BaseException(SURVEY_NOT_VALID);
+            throw new BaseException(SURVEY_IS_DELETED);
         }
         try{
             GetSurveyRes getSurveyRes =  surveyDao.selectSurveyOne(surveyIdx);
+            String introduction  = surveyDao.selectSurveyIntroduction(surveyIdx);
             List<GetSurveyQuestionRes> getSurveyQuestionRes = surveyDao.selectSurveyQuestions(surveyIdx);
-            GetSurvey getSurvey = new GetSurvey(getSurveyRes, getSurveyQuestionRes);
+            GetSurvey getSurvey = new GetSurvey(getSurveyRes, introduction, getSurveyQuestionRes);
             return getSurvey;
         } catch (Exception exception){
             exception.printStackTrace();
@@ -101,7 +102,7 @@ public class SurveyProvider {
         }
     }
     /*
-    userIdx로 내설문조사 조회
+    userIdx로 내설문조사 리스트 조회
      */
     public  List<GetSurveyRes> getMySurvey(int userIdx) throws BaseException{
         try{
@@ -118,6 +119,9 @@ public class SurveyProvider {
     내설문조사 결과 조회
      */
     public GetSurveyResultRes getSurveyResult(int surveyIdx) throws BaseException{
+        if(checkSurveyIsValid(surveyIdx)==0){
+            throw new BaseException(SURVEY_IS_DELETED);
+        }
         try{
             GetSurveyRes getSurveyRes = surveyDao.selectSurveyOne(surveyIdx);
             List<QuestionResult> questionResultList = surveyDao.selectQuestionResult(surveyIdx);
