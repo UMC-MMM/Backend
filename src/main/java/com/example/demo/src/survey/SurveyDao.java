@@ -156,7 +156,9 @@ public class SurveyDao {
         return this.jdbcTemplate.update(deleteSurveyQuery, deleteSurveyParams);
 
     }
-
+    /*
+    유저 존재하는지
+    */
     public int checkUserExist(int userIdx) {
         String checkUserExistQuery = "select exists(select userIdx from User where userIdx = ?)";
         int checkUserExistParams = userIdx;
@@ -165,7 +167,9 @@ public class SurveyDao {
                 checkUserExistParams);
 
     }
-
+    /*
+    설문조사 존재하는지
+     */
     public int checkSurveyExist(int surveyIdx) {
         String checkSurveyExistQuery = "select exists(select surveyIdx from Survey where surveyIdx = ?)";
         int checkSurveyExistParams = surveyIdx;
@@ -174,16 +178,20 @@ public class SurveyDao {
                 checkSurveyExistParams);
 
     }
-
+    /*
+    설문조사가 상태 ACTIVE 2 , INACTIVE 1, DELETED 0
+     */
     public int checkSurveyIsValid(int surveyIdx) {
         String checkSurveyIsValidQuery = "select surveyStatus surveyIdx from Survey where surveyIdx = ?";
         int checkSurveyIsValidParam = surveyIdx;
-        String surveyStat = jdbcTemplate.queryForObject(checkSurveyIsValidQuery,
+        String surveyStat = this.jdbcTemplate.queryForObject(checkSurveyIsValidQuery,
                 String.class,
                 checkSurveyIsValidParam);
         if(surveyStat.equals("ACTIVE")){
+            return 2;
+        } else if(surveyStat.equals("INACTIVE")) {
             return 1;
-        } else { //surveyStat == "INACTIVE"
+        } else { //surveyStat == "DELETED"
             return 0;
         }
     }
@@ -202,6 +210,20 @@ public class SurveyDao {
             }
         }
         return false;
+    }
+    /*
+    이미 참여한 설문조사인지
+    참여함 1 참여안함 0
+     */
+    public boolean checkParticipatedUser(int userIdx, int surveyIdx) {
+        String checkParticipatedUserQuery = "SELECT exists(SELECT * from SurveyParticipant where participantIdx =? AND  surveyIdx = ?)";
+        Object [] checkParticipatedUserParams= new Object[]{userIdx,surveyIdx};
+        int result = this.jdbcTemplate.queryForObject(checkParticipatedUserQuery,int.class,checkParticipatedUserParams);
+        if (result == 1){
+            return true; //참여한적 있음
+        }
+            return false; //참여한적 없음
+
     }
 
     public Map<Integer, String> selectSurveyCategoryList() {
@@ -248,7 +270,7 @@ public class SurveyDao {
                 "SELECT s.surveyIdx, s.surveyTitle, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
                         "       s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
                         "FROM User as u left join Survey as s on u.userIdx = s.userIdx \n" +
-                        "WHERE s.surveyStatus ='ACTIVE' and s.surveyIdx = ?;";
+                        "WHERE s.surveyIdx = ?;";
         int selectSurveyParam = surveyIdx;
         return this.jdbcTemplate.queryForObject(selectSurveyQuery,
                 (rs, rowNum) -> new GetSurveyRes(
