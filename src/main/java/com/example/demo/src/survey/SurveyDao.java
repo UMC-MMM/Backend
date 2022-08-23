@@ -113,6 +113,17 @@ public class SurveyDao {
 
     }
 
+
+    /*
+    설문조사 참여자 등록
+    */
+    public void insertSurveyParticipant(int userIdx, int surveyIdx){
+        String insertSurveyParticipantQuery = "INSERT INTO SurveyParticipant(participantIdx, surveyIdx) VALUES (?,?)";
+        Object[]  insertSurveyParticipantParam = new Object[]{userIdx,surveyIdx};
+        this.jdbcTemplate.update(insertSurveyParticipantQuery,insertSurveyParticipantParam);
+    }
+
+
     /*
     설문조사 소요시간 자동 설정
      */
@@ -123,6 +134,7 @@ public class SurveyDao {
         return this.jdbcTemplate.update(setSurveyTimeQuery, setSurveyTimeParams);
 
     }
+
 
 
 
@@ -154,6 +166,19 @@ public class SurveyDao {
                 int.class,
                 checkSurveyExistParams);
 
+    }
+
+    public int checkSurveyIsValid(int surveyIdx) {
+        String checkSurveyIsValidQuery = "select surveyStatus surveyIdx from Survey where surveyIdx = ?";
+        int checkSurveyIsValidParam = surveyIdx;
+        String surveyStat = jdbcTemplate.queryForObject(checkSurveyIsValidQuery,
+                String.class,
+                checkSurveyIsValidParam);
+        if(surveyStat.equals("ACTIVE")){
+            return 1;
+        } else { //surveyStat == "INACTIVE"
+            return 0;
+        }
     }
 
     /*
