@@ -51,7 +51,31 @@ public class SurveyService {
                     surveyDao.insertSurveyQuestionOption(questionIdx, option);
                 }
             }
-            surveyDao.setSurveyTime(surveyIdx); //설문조사 소요 시간 설정
+            /*
+            int CheckboxCnt = surveyDao.getCheckboxCnt(surveyIdx); //체크박스 수
+            int EssayCnt = surveyDao.getEssayCnt(surveyIdx); //서술형 수
+            int surveyTime = 0;
+            if(CheckboxCnt < 3 && EssayCnt == 0){
+                surveyTime = 1;
+            }
+            else if(CheckboxCnt < 5 && EssayCnt == 0){
+                surveyTime = 3;
+            }
+            else if(CheckboxCnt < 10 && EssayCnt == 0 || CheckboxCnt > 4 && EssayCnt < 2){
+                surveyTime = 5;
+            } 
+            else if (CheckboxCnt < 20 && EssayCnt == 0 || CheckboxCnt > 9 && EssayCnt < 4) {
+                surveyTime = 10;
+            }
+            else if (CheckboxCnt < 30 && EssayCnt == 0 || CheckboxCnt > 9 && EssayCnt < 6) {
+                surveyTime = 15;
+            }
+            else if(CheckboxCnt > 29 && EssayCnt == 0 || CheckboxCnt > 19 && EssayCnt > 4){
+                surveyTime = 30;
+            }
+            surveyDao.setSurveyTime(surveyTime, surveyIdx);
+
+             */
             return new PostSurveyRes(surveyIdx);
         }
         catch (Exception exception) {
