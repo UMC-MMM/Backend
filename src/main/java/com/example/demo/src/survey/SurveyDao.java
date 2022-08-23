@@ -113,6 +113,15 @@ public class SurveyDao {
         return this.jdbcTemplate.update(setSurveyTimeQuery, setSurveyTimeParams);
 
     }
+    /*
+    설문조사 참여자 등록
+    */
+    public void insertSurveyParticipant(int userIdx, int surveyIdx){
+        String insertSurveyParticipantQuery = "INSERT INTO SurveyParticipant(participantIdx, surveyIdx) VALUES (?,?)";
+        Object[]  insertSurveyParticipantParam = new Object[]{userIdx,surveyIdx};
+        this.jdbcTemplate.update(insertSurveyParticipantQuery,insertSurveyParticipantParam);
+    }
+
 
     /*
     설문조사 질문
