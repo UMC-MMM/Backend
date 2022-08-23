@@ -388,6 +388,19 @@ public class SurveyDao {
 
     }
 
+    /*
+    설문조사 introduction 받아오기
+     */
+    public String selectSurveyIntroduction(int surveyIdx){
+        String selectSurveyIntroductionQuery = "SELECT surveyIntroduction FROM Survey WHERE surveyIdx=?";
+        int selectSurveyIntroductionParam = surveyIdx;
+        try{return this.jdbcTemplate.queryForObject(selectSurveyIntroductionQuery,String.class,selectSurveyIntroductionParam);
+        }catch (NullPointerException e) { // 쿼리문에 해당하는 결과가 없을 때
+            return "";
+        }
+
+    }
+
 }
 
 

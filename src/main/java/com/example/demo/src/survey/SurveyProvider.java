@@ -92,8 +92,9 @@ public class SurveyProvider {
         }
         try{
             GetSurveyRes getSurveyRes =  surveyDao.selectSurveyOne(surveyIdx);
+            String introduction  = surveyDao.selectSurveyIntroduction(surveyIdx);
             List<GetSurveyQuestionRes> getSurveyQuestionRes = surveyDao.selectSurveyQuestions(surveyIdx);
-            GetSurvey getSurvey = new GetSurvey(getSurveyRes, getSurveyQuestionRes);
+            GetSurvey getSurvey = new GetSurvey(getSurveyRes, introduction, getSurveyQuestionRes);
             return getSurvey;
         } catch (Exception exception){
             exception.printStackTrace();
