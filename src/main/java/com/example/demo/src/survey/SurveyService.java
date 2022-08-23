@@ -120,6 +120,10 @@ public class SurveyService {
                     }
                 }
             }
+
+            //설문조사 참여자 목록 추가
+            //surveyDao.insertSurveyParticipant(userIdx, surveyIdx);
+
             String result = "설문조사 답변 등록 성공";
             surveyDao.countParticipant(surveyIdx); //설문조사 참여자 수 증가
             return new BaseResponse<>(result);

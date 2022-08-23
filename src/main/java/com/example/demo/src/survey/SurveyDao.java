@@ -174,6 +174,25 @@ public class SurveyDao {
     }
 
     /*
+    설문조사가 상태 ACTIVE 2 , INACTIVE 1, DELETED 0
+     */
+    public int checkSurveyIsValid(int surveyIdx) {
+        String checkSurveyIsValidQuery = "select surveyStatus surveyIdx from Survey where surveyIdx = ?";
+        int checkSurveyIsValidParam = surveyIdx;
+        String surveyStat = this.jdbcTemplate.queryForObject(checkSurveyIsValidQuery,
+                String.class,
+                checkSurveyIsValidParam);
+        if(surveyStat.equals("ACTIVE")){
+            return 2;
+        } else if(surveyStat.equals("INACTIVE")) {
+            return 1;
+        } else { //surveyStatus == "DELETED"
+            return 0;
+        }
+    }
+
+
+    /*
     내 설문조사인지
      */
     public boolean checkMySurvey(int userIdx, int surveyIdx) {
@@ -233,7 +252,8 @@ public class SurveyDao {
                 "SELECT s.surveyIdx, s.surveyTitle, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
                         "       s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
                         "FROM User as u left join Survey as s on u.userIdx = s.userIdx \n" +
-                        "WHERE s.surveyStatus ='ACTIVE' and s.surveyIdx = ?;";
+                        "WHERE s.surveyIdx = ?";
+
         int selectSurveyParam = surveyIdx;
         return this.jdbcTemplate.queryForObject(selectSurveyQuery,
                 (rs, rowNum) -> new GetSurveyRes(
@@ -279,7 +299,7 @@ public class SurveyDao {
         String selectSurveyByUserIdxQuery = "SELECT s.surveyIdx, s.surveyTitle, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
                 "       s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
                 "FROM User as u left join Survey as s on u.userIdx = s.userIdx \n" +
-                "WHERE s.surveyStatus ='ACTIVE' and s.userIdx = ?";
+                "WHERE (s.surveyStatus ='ACTIVE' or s.surveyStatus ='INACTIVE') and s.userIdx = ?";
         int selectSurveyByUserIdxParam = userIdx;
         return this.jdbcTemplate.query(selectSurveyByUserIdxQuery,
                 (rs, rowNum) -> new GetSurveyRes(

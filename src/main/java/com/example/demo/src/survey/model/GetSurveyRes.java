@@ -14,6 +14,7 @@ import java.util.List;
 public class GetSurveyRes {
     private int surveyIdx;
     private String surveyTitle;
+    //private String surveyIntroduction;
     private String createdAt;
     private String deadlineAt;
     private String preferGender;
