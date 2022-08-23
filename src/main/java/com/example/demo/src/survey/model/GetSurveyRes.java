@@ -20,7 +20,7 @@ public class GetSurveyRes {
     private int preferAge;
     private int surveyTime;
     private String hashtag;
-    private String surveyCategoryTitle;
+    private int surveyCategoryIdx;
     private int surveyPointValue;
     private int totalParticipant;
     private int userIdx;
