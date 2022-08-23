@@ -31,8 +31,8 @@ public class SurveyDao {
     public List<GetSurveyRes> selectSurvey() {
         String selectSurveyQuery =
                 "SELECT s.surveyIdx, s.surveyTitle, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
-                        "       s.surveyTime, s.hashtag, c.surveyCategoryTitle, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
-                        "FROM User as u left join Survey as s on u.userIdx = s.userIdx left join SurveyCategory as c on s.surveyCategoryIdx = c.surveyCategoryId\n" +
+                        "       s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
+                        "FROM User as u left join Survey as s on u.userIdx = s.userIdx \n" +
                         "WHERE s.surveyStatus ='ACTIVE'";
 
         return this.jdbcTemplate.query(selectSurveyQuery,
@@ -45,7 +45,7 @@ public class SurveyDao {
                         rs.getInt("preferAge"),
                         rs.getInt("surveyTime"),
                         rs.getString("hashtag"),
-                        rs.getString("surveyCategoryTitle"),
+                        rs.getInt("surveyCategoryIdx"),
                         rs.getInt("surveyPointValue"),
                         rs.getInt("totalParticipant"),
                         rs.getInt("userIdx"),
@@ -214,8 +214,8 @@ public class SurveyDao {
     public GetSurveyRes selectSurveyOne(int surveyIdx) {
         String selectSurveyQuery =
                 "SELECT s.surveyIdx, s.surveyTitle, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
-                        "       s.surveyTime, s.hashtag, c.surveyCategoryTitle, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
-                        "FROM User as u left join Survey as s on u.userIdx = s.userIdx left join SurveyCategory as c on s.surveyCategoryIdx = c.surveyCategoryId\n" +
+                        "       s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
+                        "FROM User as u left join Survey as s on u.userIdx = s.userIdx \n" +
                         "WHERE s.surveyStatus ='ACTIVE' and s.surveyIdx = ?;";
         int selectSurveyParam = surveyIdx;
         return this.jdbcTemplate.queryForObject(selectSurveyQuery,
@@ -228,7 +228,7 @@ public class SurveyDao {
                         rs.getInt("preferAge"),
                         rs.getInt("surveyTime"),
                         rs.getString("hashtag"),
-                        rs.getString("surveyCategoryTitle"),
+                        rs.getInt("surveyCategoryIdx"),
                         rs.getInt("surveyPointValue"),
                         rs.getInt("totalParticipant"),
                         rs.getInt("userIdx"),
@@ -260,8 +260,8 @@ public class SurveyDao {
      */
     public List<GetSurveyRes> selectSurveyByUserIdx(int userIdx) {
         String selectSurveyByUserIdxQuery = "SELECT s.surveyIdx, s.surveyTitle, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
-                "       s.surveyTime, s.hashtag, c.surveyCategoryTitle, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
-                "FROM User as u left join Survey as s on u.userIdx = s.userIdx left join SurveyCategory as c on s.surveyCategoryIdx = c.surveyCategoryId\n" +
+                "       s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
+                "FROM User as u left join Survey as s on u.userIdx = s.userIdx \n" +
                 "WHERE s.surveyStatus ='ACTIVE' and s.userIdx = ?";
         int selectSurveyByUserIdxParam = userIdx;
         return this.jdbcTemplate.query(selectSurveyByUserIdxQuery,
@@ -274,7 +274,7 @@ public class SurveyDao {
                         rs.getInt("preferAge"),
                         rs.getInt("surveyTime"),
                         rs.getString("hashtag"),
-                        rs.getString("surveyCategoryTitle"),
+                        rs.getInt("surveyCategoryIdx"),
                         rs.getInt("surveyPointValue"),
                         rs.getInt("totalParticipant"),
                         rs.getInt("userIdx"),

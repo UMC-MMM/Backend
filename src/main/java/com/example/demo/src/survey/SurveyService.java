@@ -51,7 +51,7 @@ public class SurveyService {
                     surveyDao.insertSurveyQuestionOption(questionIdx, option);
                 }
             }
-            //if()
+            surveyDao.setSurveyTime(surveyIdx); //설문조사 소요 시간 설정
             return new PostSurveyRes(surveyIdx);
         }
         catch (Exception exception) {
