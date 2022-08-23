@@ -210,7 +210,7 @@ public class SurveyDao {
      */
     public boolean checkParticipatedUser(int userIdx, int surveyIdx) {
         String checkParticipatedUserQuery = "SELECT exists(SELECT * from SurveyParticipant where participantIdx =? AND  surveyIdx = ?)";
-        int [] checkParticipatedUserParams= new int[]{userIdx,surveyIdx};
+        Object [] checkParticipatedUserParams= new Object[]{userIdx,surveyIdx};
         int result = this.jdbcTemplate.queryForObject(checkParticipatedUserQuery,int.class,checkParticipatedUserParams);
         if (result == 1){
             return true; //참여한적 있음
@@ -263,7 +263,7 @@ public class SurveyDao {
                 "SELECT s.surveyIdx, s.surveyTitle, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
                         "       s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
                         "FROM User as u left join Survey as s on u.userIdx = s.userIdx \n" +
-                        "WHERE s.surveyStatus ='ACTIVE' and s.surveyIdx = ?;";
+                        "WHERE s.surveyIdx = ?;";
         int selectSurveyParam = surveyIdx;
         return this.jdbcTemplate.queryForObject(selectSurveyQuery,
                 (rs, rowNum) -> new GetSurveyRes(

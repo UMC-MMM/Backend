@@ -132,19 +132,21 @@ public class SurveyController {
     public ResponseEntity<?> getSurvey(@PathVariable("surveyIdx") int surveyIdx) {
         try {
             int userIdxByJwt = jwtService.getUserIdx();
+            GetSurvey getSurvey = surveyProvider.getSurvey(surveyIdx);
+            System.out.println(getSurvey.getGetSurveyRes().getUserIdx());
+            System.out.println(userIdxByJwt);
+            if(getSurvey.getGetSurveyRes().getUserIdx()==userIdxByJwt){ //내 설문조사일 경우
+                HttpHeaders headers = new HttpHeaders();
+                headers.setLocation(URI.create("/users/mysurveys/"+surveyIdx));
+                return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+            }
             if(surveyProvider.checkSurveyIsValid(surveyIdx)!=2){ //설문조사가 ACTIVE상태가 아닐 경우
                 return new ResponseEntity(new BaseResponse<>(BaseResponseStatus.SURVEY_NOT_VALID),HttpStatus.OK);
             }
             if(surveyProvider.isParticipatedUser(userIdxByJwt,surveyIdx)){ //이미 참여한 설문조사일 경우
                 return new ResponseEntity(new BaseResponse<>(BaseResponseStatus.SURVEY_PARTICIPATED),HttpStatus.OK);
             }
-            GetSurvey getSurvey = surveyProvider.getSurvey(surveyIdx);
             BaseResponse<GetSurvey> res = new BaseResponse<>(getSurvey);
-            if(getSurvey.getGetSurveyRes().getUserIdx()==userIdxByJwt){ //내 설문조사일 경우
-                HttpHeaders headers = new HttpHeaders();
-                headers.setLocation(URI.create("/users/mysurveys/"+surveyIdx));
-                return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
-            }
             return new ResponseEntity(res,HttpStatus.OK);
         } catch (BaseException exception) {
             BaseResponse<BaseResponseStatus> res = new BaseResponse<>((exception.getStatus()));

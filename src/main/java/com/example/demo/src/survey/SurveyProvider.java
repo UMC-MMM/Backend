@@ -96,6 +96,7 @@ public class SurveyProvider {
             GetSurvey getSurvey = new GetSurvey(getSurveyRes, getSurveyQuestionRes);
             return getSurvey;
         } catch (Exception exception){
+            exception.printStackTrace();
             throw new BaseException(DATABASE_ERROR);
         }
     }
