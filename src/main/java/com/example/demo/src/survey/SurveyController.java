@@ -91,10 +91,6 @@ public class SurveyController {
             {
                 return new BaseResponse<>(BaseResponseStatus.POST_SURVEY_EMPTY_DEADLINE);
             }
-            if(postSurveyReq.getSurveyTime()<1)
-            {
-                return new BaseResponse<>(BaseResponseStatus.POST_SURVEY_EMPTY_SURVEYTIME);
-            }
 
             if(postSurveyReq.getHashtag().length()>45)
             {
