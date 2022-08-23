@@ -131,12 +131,18 @@ public class SurveyController {
     @GetMapping("/{surveyIdx}")//(GET) 127.0.0.1:9000/survey/{surveyIdx}
     public ResponseEntity<?> getSurvey(@PathVariable("surveyIdx") int surveyIdx) {
         try {
+            int userIdxByJwt = jwtService.getUserIdx();
+            if(surveyProvider.checkSurveyIsValid(surveyIdx)!=2){ //설문조사가 ACTIVE상태가 아닐 경우
+                return new ResponseEntity(new BaseResponse<>(BaseResponseStatus.SURVEY_NOT_VALID),HttpStatus.OK);
+            }
+            if(surveyProvider.isParticipatedUser(userIdxByJwt,surveyIdx)){ //이미 참여한 설문조사일 경우
+                return new ResponseEntity(new BaseResponse<>(BaseResponseStatus.SURVEY_PARTICIPATED),HttpStatus.OK);
+            }
             GetSurvey getSurvey = surveyProvider.getSurvey(surveyIdx);
             BaseResponse<GetSurvey> res = new BaseResponse<>(getSurvey);
-            int userIdxByJwt = jwtService.getUserIdx();
-            if(getSurvey.getGetSurveyRes().getUserIdx()==userIdxByJwt){
+            if(getSurvey.getGetSurveyRes().getUserIdx()==userIdxByJwt){ //내 설문조사일 경우
                 HttpHeaders headers = new HttpHeaders();
-                headers.setLocation(URI.create("/users/mysurveys/"+surveyIdx));// 설문조사 결과 조회 페이지 나오면 수정
+                headers.setLocation(URI.create("/users/mysurveys/"+surveyIdx));
                 return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
             }
             return new ResponseEntity(res,HttpStatus.OK);

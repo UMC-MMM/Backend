@@ -59,7 +59,7 @@ public class SurveyProvider {
     }
     /*
     유효한 설문조사인지(마감안됐는지)
-    유효 1 마감 0
+    유효 2 마감 1 삭제 0
      */
     public int checkSurveyIsValid(int surveyIdx) throws BaseException{
          try{
@@ -121,6 +121,18 @@ public class SurveyProvider {
             GetSurveyRes getSurveyRes = surveyDao.selectSurveyOne(surveyIdx);
             List<QuestionResult> questionResultList = surveyDao.selectQuestionResult(surveyIdx);
             return new GetSurveyResultRes(getSurveyRes,questionResultList);
+        }catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    /*
+    설문조사에 이미 참여한 유저인지
+     */
+    public boolean isParticipatedUser(int userIdx, int surveyIdx) throws  BaseException{
+        try{
+            boolean result = surveyDao.checkParticipatedUser(userIdx, surveyIdx);
+            return result;
         }catch (Exception exception){
             throw new BaseException(DATABASE_ERROR);
         }
