@@ -133,8 +133,6 @@ public class SurveyController {
         try {
             int userIdxByJwt = jwtService.getUserIdx();
             GetSurvey getSurvey = surveyProvider.getSurvey(surveyIdx);
-            System.out.println(getSurvey.getGetSurveyRes().getUserIdx());
-            System.out.println(userIdxByJwt);
             if(getSurvey.getGetSurveyRes().getUserIdx()==userIdxByJwt){ //내 설문조사일 경우
                 HttpHeaders headers = new HttpHeaders();
                 headers.setLocation(URI.create("/users/mysurveys/"+surveyIdx));
