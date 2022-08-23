@@ -46,7 +46,6 @@ public enum BaseResponseStatus {
     POST_SURVEY_INVALID_TITLE(false, 2033, "입력하신 제목의 글자 수가 허용된 범위를 초과하였습니다."),
 
     POST_SURVEY_EMPTY_DEADLINE(false, 2034,"마감일을 입력하세요."),
-    POST_SURVEY_EMPTY_SURVEYTIME(false, 2035, "설문 소요 시간을 입력하세요."),
     POST_SURVEY_INVALID_INTRODUCTION(false, 2037, "입력하신 소개글의 글자 수가 허용된 범위를 초과하였습니다."),
     POST_SURVEY_EMPTY_QUESTION(false, 2038, "문항을 추가하세요."),
     POST_SURVEY_INVALID_HASHTAG(false, 2039,"입력하신 해시태그의 글자 수가 허용된 범위를 초과하였습니다."),

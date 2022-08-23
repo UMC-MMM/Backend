@@ -62,13 +62,11 @@ public class SurveyDao {
                             String hashtag,
                             int surveyPointValue, int couponIdx) {
         String insertSurveyQuery = "INSERT INTO Survey(userIdx, surveyIntroduction, surveyTitle, surveyCategoryIdx,\n" +
-                "        deadlineAt, preferGender, preferAge, surveyTime, hashtag,\n" +
-                "surveyPointValue, couponIdx)\n" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
+                "        deadlineAt, preferGender, preferAge, hashtag, couponIdx)\n" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         Object[] insertSurveyParams = new Object[]{userIdx, surveyIntroduction, surveyTitle, surveyCategoryIdx,
-                deadlineAt, preferGender, preferAge, surveyTime,
-                hashtag,
-                surveyPointValue, couponIdx};
+                deadlineAt, preferGender, preferAge,
+                hashtag, couponIdx};
         this.jdbcTemplate.update(insertSurveyQuery, insertSurveyParams);
 
         String lastInsertIdxQuery = "select last_insert_id()";
@@ -114,6 +112,19 @@ public class SurveyDao {
         return this.jdbcTemplate.queryForObject(lastInsertIdxQuery, int.class);
 
     }
+
+    /*
+    설문조사 소요시간 자동 설정
+     */
+
+    public int setSurveyTime(int surveyIdx) {
+        String setSurveyTimeQuery = "";
+        Object[] setSurveyTimeParams = new Object[]{surveyIdx};
+        return this.jdbcTemplate.update(setSurveyTimeQuery, setSurveyTimeParams);
+
+    }
+
+
 
 
     /*

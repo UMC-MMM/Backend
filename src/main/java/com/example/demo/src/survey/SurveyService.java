@@ -51,6 +51,7 @@ public class SurveyService {
                     surveyDao.insertSurveyQuestionOption(questionIdx, option);
                 }
             }
+            //if()
             return new PostSurveyRes(surveyIdx);
         }
         catch (Exception exception) {
