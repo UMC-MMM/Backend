@@ -85,6 +85,36 @@ public class SurveyDao {
     }
 
     /*
+    get 체크박스 수
+     */
+    public int getCheckboxCnt(int surveyIdx) {
+        String getCheckboxCntQuery = "SELECT sum(case when questionType='Checkbox' AND surveyIdx = ? then 1 END)\n" +
+                "    as CheckboxCnt FROM SurveyQuestion";
+        int getCheckboxCntParam = surveyIdx;
+        return this.jdbcTemplate.queryForObject(getCheckboxCntQuery, int.class, getCheckboxCntParam);
+    }
+
+    /*
+    get 서술형 수
+     */
+    public int getEssayCnt(int surveyIdx) {
+        String getEssayCntQuery = "SELECT sum(case when questionType='ESSAY' AND surveyIdx = ? then 1 END)\n" +
+                "    as EssayCnt FROM SurveyQuestion";
+        int getEssayCntParam = surveyIdx;
+        return this.jdbcTemplate.queryForObject(getEssayCntQuery, int.class, getEssayCntParam);
+    }
+
+    /*
+    설문조사 소요시간 설정
+     */
+    public int setSurveyTime(int surveyTime, int surveyIdx) {
+        String setSurveyTimeQuery = "UPDATE Survey SET surveyTime = ? WHERE surveyIdx = ?;";
+        Object[] setSurveyTimeParams = new Object[]{surveyTime, surveyIdx};
+        return this.jdbcTemplate.update(setSurveyTimeQuery, setSurveyTimeParams);
+
+    }
+
+    /*
     설문조사 질문
      */
     public int insertSurveyQuestion(int surveyIdx, PostSurveyQuestionReq postSurveyQuestionReq) {
@@ -114,36 +144,13 @@ public class SurveyDao {
     }
 
 
-    /*
-    설문조사 참여자 등록
-    */
-    public void insertSurveyParticipant(int userIdx, int surveyIdx){
-        String insertSurveyParticipantQuery = "INSERT INTO SurveyParticipant(participantIdx, surveyIdx) VALUES (?,?)";
-        Object[]  insertSurveyParticipantParam = new Object[]{userIdx,surveyIdx};
-        this.jdbcTemplate.update(insertSurveyParticipantQuery,insertSurveyParticipantParam);
-    }
-
-
-    /*
-    설문조사 소요시간 자동 설정
-     */
-
-    public int setSurveyTime(int surveyIdx) {
-        String setSurveyTimeQuery = "";
-        Object[] setSurveyTimeParams = new Object[]{surveyIdx};
-        return this.jdbcTemplate.update(setSurveyTimeQuery, setSurveyTimeParams);
-
-    }
-
-
-
 
 
     /*
     설문조사 삭제
      */
     public int deleteSurvey(int surveyIdx) {
-        String deleteSurveyQuery = "UPDATE Survey SET surveyStatus='INACTIVE' WHERE surveyIdx=?";
+        String deleteSurveyQuery = "UPDATE Survey SET surveyStatus='DELETE' WHERE surveyIdx=?";
         Object[] deleteSurveyParams = new Object[]{surveyIdx};
 
         return this.jdbcTemplate.update(deleteSurveyQuery, deleteSurveyParams);
