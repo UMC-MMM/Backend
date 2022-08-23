@@ -5,6 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="656727c4-73f9-468e-af0a-199517bdd94c" name="변경" comment="변경">
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/HomeProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/HomeProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/Models/GetHomeRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/Models/GetHomeRes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionAnswerRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionAnswerRes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionRes.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyService.java" afterDir="false" />
@@ -41,6 +45,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

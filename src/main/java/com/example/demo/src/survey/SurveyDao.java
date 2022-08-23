@@ -144,6 +144,8 @@ public class SurveyDao {
     }
 
 
+
+
     /*
     설문조사 삭제
      */
@@ -171,6 +173,19 @@ public class SurveyDao {
                 int.class,
                 checkSurveyExistParams);
 
+    }
+
+    public int checkSurveyIsValid(int surveyIdx) {
+        String checkSurveyIsValidQuery = "select surveyStatus surveyIdx from Survey where surveyIdx = ?";
+        int checkSurveyIsValidParam = surveyIdx;
+        String surveyStat = jdbcTemplate.queryForObject(checkSurveyIsValidQuery,
+                String.class,
+                checkSurveyIsValidParam);
+        if(surveyStat.equals("ACTIVE")){
+            return 1;
+        } else { //surveyStat == "INACTIVE"
+            return 0;
+        }
     }
 
     /*
