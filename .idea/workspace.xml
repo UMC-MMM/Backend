@@ -9,6 +9,9 @@
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/Models/GetHomeRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/home/Models/GetHomeRes.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionAnswerRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionAnswerRes.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/src/survey/model/GetSurveyQuestionRes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/config/BaseResponseStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/config/BaseResponseStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/src/survey/SurveyService.java" afterDir="false" />
     </list>
@@ -61,20 +64,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Problems" />
-    <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelOrder2": "2",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RequestMappingsPanelWidth2": "75"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.example.demo.src.user.model" />
       <recent name="com.example.demo.src.survey.model" />
+      <recent name="com.example.demo.src.user.model" />
       <recent name="com.example.demo.src.survey" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DemoApplication">
+  <component name="RunManager" selected="Spring Boot.DemoApplication">
     <configuration name="DemoApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.demo.DemoApplication" />
       <module name="demo.main" />
@@ -95,11 +102,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.DemoApplication" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -134,7 +136,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

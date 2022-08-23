@@ -33,7 +33,7 @@ public class SurveyProvider {
             return getSurvey;
         }
         catch (Exception exception) {
-         //   System.out.println(exception);
+            System.out.println(exception);
             throw new BaseException(DATABASE_ERROR);
         }
 
@@ -107,8 +107,8 @@ public class SurveyProvider {
             if(checkUserExist(userIdx)==0){
                 throw new BaseException(USERS_EMPTY_USER_ID);
             }
-            List<GetSurveyRes> getMySurvey = surveyDao.selectSurveyByUserIdx(userIdx);
-            return  getMySurvey;
+            List<GetSurveyRes> getSurvey = surveyDao.selectSurveyByUserIdx(userIdx);
+            return getSurvey;
         }catch (Exception exception){
             throw new BaseException(DATABASE_ERROR);
         }
