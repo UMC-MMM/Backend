@@ -28,8 +28,8 @@ public class SurveyProvider {
     public List<GetSurveyRes> retrieveSurvey() throws BaseException{
 
         try{
-            List<GetSurveyRes> getSurvey = surveyDao.selectBestSurvey();
 
+            List<GetSurveyRes> getSurvey = surveyDao.selectSurvey();
             return getSurvey;
         }
         catch (Exception exception) {
