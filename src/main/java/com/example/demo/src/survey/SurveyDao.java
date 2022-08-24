@@ -88,20 +88,28 @@ public class SurveyDao {
     get 체크박스 수
      */
     public int getCheckboxCnt(int surveyIdx) {
-        String getCheckboxCntQuery = "SELECT sum(case when questionType='Checkbox' AND surveyIdx = ? then 1 END)\n" +
-                "    as CheckboxCnt FROM SurveyQuestion";
-        int getCheckboxCntParam = surveyIdx;
-        return this.jdbcTemplate.queryForObject(getCheckboxCntQuery, int.class, getCheckboxCntParam);
+        try{
+            String getCheckboxCntQuery = "SELECT sum(case when questionType='Checkbox' AND surveyIdx = ? then 1 END)\n" +
+                    "    as CheckboxCnt FROM SurveyQuestion";
+            int getCheckboxCntParam = surveyIdx;
+            return this.jdbcTemplate.queryForObject(getCheckboxCntQuery, int.class, getCheckboxCntParam);
+        }catch (NullPointerException e){ //쿼리문에 해당하는 결과가 없을 때
+            return 0;
+        }
     }
 
     /*
     get 서술형 수
      */
     public int getEssayCnt(int surveyIdx) {
-        String getEssayCntQuery = "SELECT sum(case when questionType='ESSAY' AND surveyIdx = ? then 1 END)\n" +
-                "    as EssayCnt FROM SurveyQuestion";
-        int getEssayCntParam = surveyIdx;
-        return this.jdbcTemplate.queryForObject(getEssayCntQuery, int.class, getEssayCntParam);
+        try{
+            String getEssayCntQuery = "SELECT sum(case when questionType='ESSAY' AND surveyIdx = ? then 1 END)\n" +
+                    "    as EssayCnt FROM SurveyQuestion";
+            int getEssayCntParam = surveyIdx;
+            return this.jdbcTemplate.queryForObject(getEssayCntQuery, int.class, getEssayCntParam);
+        }catch (NullPointerException e){
+            return 0;
+        }
     }
 
     /*

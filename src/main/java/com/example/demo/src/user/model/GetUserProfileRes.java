@@ -17,4 +17,5 @@ public class GetUserProfileRes {
     private String userGender;
     private int userAge;
     private String userEmail;
+    private String userId;
 }
