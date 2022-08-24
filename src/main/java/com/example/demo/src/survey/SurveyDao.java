@@ -55,6 +55,34 @@ public class SurveyDao {
     }
 
     /*
+    Bestsurvey 설문조사 참여자 순으로 3개만 select
+     */
+    public List<GetSurveyRes> selectBestSurvey() {
+        String selectSurveyQuery =
+                "SELECT s.surveyIdx, s.surveyTitle, s.surveyIntroduction, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
+                        "                               s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
+                        "                        FROM User as u left join Survey as s on u.userIdx = s.userIdx\n" +
+                        "                        WHERE s.surveyStatus ='ACTIVE' ORDER BY totalParticipant DESC LIMIT 3";
+
+        return this.jdbcTemplate.query(selectSurveyQuery,
+                (rs, rowNum) -> new GetSurveyRes(
+                        rs.getInt("surveyIdx"),
+                        rs.getString("surveyTitle"),
+                        rs.getString("surveyIntroduction"),
+                        rs.getString("createdAt"),
+                        rs.getString("deadlineAt"),
+                        rs.getString("preferGender"),
+                        rs.getInt("preferAge"),
+                        rs.getInt("surveyTime"),
+                        rs.getString("hashtag"),
+                        rs.getInt("surveyCategoryIdx"),
+                        rs.getInt("surveyPointValue"),
+                        rs.getInt("totalParticipant"),
+                        rs.getInt("userIdx"),
+                        rs.getString("userName")
+                ));
+    }
+    /*
     설문조사 등록
      */
     public int insertSurvey(int userIdx, String surveyIntroduction, String surveyTitle,

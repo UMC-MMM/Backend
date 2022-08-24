@@ -28,7 +28,7 @@ public class SurveyProvider {
     public List<GetSurveyRes> retrieveSurvey() throws BaseException{
 
         try{
-            List<GetSurveyRes> getSurvey = surveyDao.selectSurvey();
+            List<GetSurveyRes> getSurvey = surveyDao.selectBestSurvey();
 
             return getSurvey;
         }

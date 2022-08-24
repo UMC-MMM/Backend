@@ -28,7 +28,7 @@ public class HomeProvider {
 
     public GetHomeRes getHome() throws BaseException {
         try {
-            List<GetSurveyRes> getSurvey = surveyDao.selectSurvey();
+            List<GetSurveyRes> getSurvey = surveyDao.selectBestSurvey();
             Map<Integer,String> getCategoryList = surveyDao.selectSurveyCategoryList();
             GetHomeRes getHomeRes = new GetHomeRes(getSurvey, getCategoryList);
             return getHomeRes;
