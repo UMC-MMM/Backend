@@ -121,6 +121,17 @@ public class SurveyDao {
         return this.jdbcTemplate.update(setSurveyTimeQuery, setSurveyTimeParams);
 
     }
+
+    /*
+    설문조사 참여자 지급 포인트 설정
+     */
+    public int setSurveyPointValue(int surveyPointValue, int surveyIdx) {
+        String setSurveyPointValueQuery = "UPDATE Survey SET surveyPointValue = ? WHERE surveyIdx = ?;";
+        Object[] setSurveyPointValueParams = new Object[]{surveyPointValue, surveyIdx};
+        return this.jdbcTemplate.update(setSurveyPointValueQuery, setSurveyPointValueParams);
+
+    }
+
     /*
     설문조사 참여자 등록
     */
@@ -167,7 +178,7 @@ public class SurveyDao {
     설문조사 삭제
      */
     public int deleteSurvey(int surveyIdx) {
-        String deleteSurveyQuery = "UPDATE Survey SET surveyStatus='DELETE' WHERE surveyIdx=?";
+        String deleteSurveyQuery = "UPDATE Survey SET surveyStatus='DELETED' WHERE surveyIdx=?";
         Object[] deleteSurveyParams = new Object[]{surveyIdx};
 
         return this.jdbcTemplate.update(deleteSurveyQuery, deleteSurveyParams);
@@ -208,7 +219,7 @@ public class SurveyDao {
             return 2;
         } else if(surveyStat.equals("INACTIVE")) {
             return 1;
-        } else { //surveyStat == "DELETED"
+        } else { //surveyStatus == "DELETED"
             return 0;
         }
     }
