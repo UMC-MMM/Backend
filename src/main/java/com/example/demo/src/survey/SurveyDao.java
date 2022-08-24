@@ -30,7 +30,7 @@ public class SurveyDao {
      */
     public List<GetSurveyRes> selectSurvey() {
         String selectSurveyQuery =
-                "SELECT s.surveyIdx, s.surveyTitle, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
+                "SELECT s.surveyIdx, s.surveyTitle, s.surveyIntroduction, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
                         "       s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
                         "FROM User as u left join Survey as s on u.userIdx = s.userIdx \n" +
                         "WHERE s.surveyStatus ='ACTIVE'";
@@ -39,6 +39,7 @@ public class SurveyDao {
                 (rs, rowNum) -> new GetSurveyRes(
                         rs.getInt("surveyIdx"),
                         rs.getString("surveyTitle"),
+                        rs.getString("surveyIntroduction"),
                         rs.getString("createdAt"),
                         rs.getString("deadlineAt"),
                         rs.getString("preferGender"),
@@ -53,6 +54,34 @@ public class SurveyDao {
                 ));
     }
 
+    /*
+    Bestsurvey 설문조사 참여자 순으로 3개만 select
+     */
+    public List<GetSurveyRes> selectBestSurvey() {
+        String selectSurveyQuery =
+                "SELECT s.surveyIdx, s.surveyTitle, s.surveyIntroduction, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
+                        "                               s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
+                        "                        FROM User as u left join Survey as s on u.userIdx = s.userIdx\n" +
+                        "                        WHERE s.surveyStatus ='ACTIVE' ORDER BY totalParticipant DESC LIMIT 3";
+
+        return this.jdbcTemplate.query(selectSurveyQuery,
+                (rs, rowNum) -> new GetSurveyRes(
+                        rs.getInt("surveyIdx"),
+                        rs.getString("surveyTitle"),
+                        rs.getString("surveyIntroduction"),
+                        rs.getString("createdAt"),
+                        rs.getString("deadlineAt"),
+                        rs.getString("preferGender"),
+                        rs.getInt("preferAge"),
+                        rs.getInt("surveyTime"),
+                        rs.getString("hashtag"),
+                        rs.getInt("surveyCategoryIdx"),
+                        rs.getInt("surveyPointValue"),
+                        rs.getInt("totalParticipant"),
+                        rs.getInt("userIdx"),
+                        rs.getString("userName")
+                ));
+    }
     /*
     설문조사 등록
      */
@@ -295,7 +324,7 @@ public class SurveyDao {
      */
     public GetSurveyRes selectSurveyOne(int surveyIdx) {
         String selectSurveyQuery =
-                "SELECT s.surveyIdx, s.surveyTitle, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
+                "SELECT s.surveyIdx, s.surveyTitle,s.surveyIntroduction, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
                         "       s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
                         "FROM User as u left join Survey as s on u.userIdx = s.userIdx \n" +
                         "WHERE (s.surveyStatus = 'ACTIVE' OR s.surveyStatus = 'INACTIVE') AND s.surveyIdx = ?;";
@@ -304,6 +333,7 @@ public class SurveyDao {
                 (rs, rowNum) -> new GetSurveyRes(
                         rs.getInt("surveyIdx"),
                         rs.getString("surveyTitle"),
+                        rs.getString("surveyIntroduction"),
                         rs.getString("createdAt"),
                         rs.getString("deadlineAt"),
                         rs.getString("preferGender"),
@@ -341,7 +371,7 @@ public class SurveyDao {
     작성자로 설문조사 조회
      */
     public List<GetSurveyRes> selectSurveyByUserIdx(int userIdx) {
-        String selectSurveyByUserIdxQuery = "SELECT s.surveyIdx, s.surveyTitle, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
+        String selectSurveyByUserIdxQuery = "SELECT s.surveyIdx, s.surveyTitle,s.surveyIntroduction, s.createdAt, s.deadlineAt, s.preferGender, s.preferAge,\n" +
                 "       s.surveyTime, s.hashtag, s.surveyCategoryIdx, s.surveyPointValue, s.totalParticipant, s.userIdx, u.userName\n" +
                 "FROM User as u left join Survey as s on u.userIdx = s.userIdx \n" +
                 "WHERE (s.surveyStatus ='ACTIVE' or s.surveyStatus ='INACTIVE') and s.userIdx = ?";
@@ -350,6 +380,7 @@ public class SurveyDao {
                 (rs, rowNum) -> new GetSurveyRes(
                         rs.getInt("surveyIdx"),
                         rs.getString("surveyTitle"),
+                        rs.getString("surveyIntroduction"),
                         rs.getString("createdAt"),
                         rs.getString("deadlineAt"),
                         rs.getString("preferGender"),
@@ -407,18 +438,7 @@ public class SurveyDao {
 
     }
 
-    /*
-    설문조사 introduction 받아오기
-     */
-    public String selectSurveyIntroduction(int surveyIdx){
-        String selectSurveyIntroductionQuery = "SELECT surveyIntroduction FROM Survey WHERE surveyIdx=?";
-        int selectSurveyIntroductionParam = surveyIdx;
-        try{return this.jdbcTemplate.queryForObject(selectSurveyIntroductionQuery,String.class,selectSurveyIntroductionParam);
-        }catch (NullPointerException e) { // 쿼리문에 해당하는 결과가 없을 때
-            return "";
-        }
 
-    }
 
 }
 

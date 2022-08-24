@@ -14,6 +14,5 @@ import java.util.List;
 @AllArgsConstructor
 public class GetSurvey {
     private GetSurveyRes getSurveyRes;
-    private String introduction;
     private List<GetSurveyQuestionRes> surveyQuestionRes;
 }
