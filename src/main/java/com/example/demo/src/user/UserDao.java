@@ -132,7 +132,7 @@ public class UserDao {
     유저 프로필 조회
      */
     public GetUserProfileRes getUserProfile(int userIdx){
-        String getUserProfileQuery = "SELECT userIdx,profileImgUrl, userName, userGender, userAge, userEmail FROM User WHERE userIdx=?";
+        String getUserProfileQuery = "SELECT userIdx,profileImgUrl, userName, userGender, userAge, userEmail, userId FROM User WHERE userIdx=?";
         int getUserProfileParams = userIdx;
         return this.jdbcTemplate.queryForObject(getUserProfileQuery,
                 (rs, rowNum) -> new GetUserProfileRes(
@@ -141,7 +141,8 @@ public class UserDao {
                         rs.getString("userName"),
                         rs.getString("userGender"),
                         rs.getInt("userAge"),
-                        rs.getString("userEmail")),
+                        rs.getString("userEmail"),
+                        rs.getString("userId")),
                 getUserProfileParams);
     }
 

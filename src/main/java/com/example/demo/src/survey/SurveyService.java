@@ -51,31 +51,37 @@ public class SurveyService {
                     surveyDao.insertSurveyQuestionOption(questionIdx, option);
                 }
             }
-            /*
+
             int CheckboxCnt = surveyDao.getCheckboxCnt(surveyIdx); //체크박스 수
             int EssayCnt = surveyDao.getEssayCnt(surveyIdx); //서술형 수
-            int surveyTime = 0;
+            int surveyTime = 0; //설문 소요 시간
+            int surveyPointValue = 0; //설문 지급 포인트
             if(CheckboxCnt < 3 && EssayCnt == 0){
                 surveyTime = 1;
+                surveyPointValue = 10;
             }
-            else if(CheckboxCnt < 5 && EssayCnt == 0){
+            else if((CheckboxCnt < 5 && EssayCnt == 0) || (CheckboxCnt < 3 && EssayCnt <= 1)){
                 surveyTime = 3;
+                surveyPointValue = 20;
             }
-            else if(CheckboxCnt < 10 && EssayCnt == 0 || CheckboxCnt > 4 && EssayCnt < 2){
+            else if((CheckboxCnt < 10 && EssayCnt <= 1) || (CheckboxCnt < 5 && EssayCnt <= 3)){
                 surveyTime = 5;
+                surveyPointValue = 30;
             } 
-            else if (CheckboxCnt < 20 && EssayCnt == 0 || CheckboxCnt > 9 && EssayCnt < 4) {
+            else if ((CheckboxCnt < 20 && EssayCnt <= 3) || (CheckboxCnt < 10 && EssayCnt <= 5)) {
                 surveyTime = 10;
+                surveyPointValue = 40;
             }
-            else if (CheckboxCnt < 30 && EssayCnt == 0 || CheckboxCnt > 9 && EssayCnt < 6) {
+            else if ((CheckboxCnt < 30 && EssayCnt <= 5) || (CheckboxCnt < 20 && EssayCnt >= 5)) {
                 surveyTime = 15;
+                surveyPointValue = 50;
             }
-            else if(CheckboxCnt > 29 && EssayCnt == 0 || CheckboxCnt > 19 && EssayCnt > 4){
+            else if((CheckboxCnt < 30 && EssayCnt >= 5) || (CheckboxCnt >= 30)){
                 surveyTime = 30;
+                surveyPointValue = 60;
             }
-            surveyDao.setSurveyTime(surveyTime, surveyIdx);
-
-             */
+            surveyDao.setSurveyTime(surveyTime, surveyIdx); //설문 소요 시간 설정
+            surveyDao.setSurveyPointValue(surveyPointValue, surveyIdx);
             return new PostSurveyRes(surveyIdx);
         }
         catch (Exception exception) {
